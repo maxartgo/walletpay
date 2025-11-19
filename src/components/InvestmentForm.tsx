@@ -70,7 +70,7 @@ export function InvestmentForm({ user, onInvestmentCreated }: InvestmentFormProp
             </li>
             <li className="flex justify-between">
               <span className="text-gray-400">{t('staking.dailyYield')}:</span>
-              <span className="text-green-400 font-medium">1% compound</span>
+              <span className="text-green-400 font-medium">0.7758% compound</span>
             </li>
             <li className="flex justify-between">
               <span className="text-gray-400">{t('staking.yieldGoal')}:</span>
@@ -82,7 +82,7 @@ export function InvestmentForm({ user, onInvestmentCreated }: InvestmentFormProp
             </li>
             <li className="flex justify-between">
               <span className="text-gray-400">{t('staking.estimatedTime')}:</span>
-              <span className="text-white font-medium">~70 {t('staking.days')}</span>
+              <span className="text-white font-medium">~90 {t('staking.days')}</span>
             </li>
           </ul>
         </div>
