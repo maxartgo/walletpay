@@ -42,7 +42,7 @@
     },
     "dailyYields": {
       "title": "Staking con Rendimiento Diario",
-      "description": "Haz staking de 100 USDT y gana 1% de interés compuesto diario"
+      "description": "Haz staking de 100 USDT y gana 0.7758% de interés compuesto diario"
     },
     "referrals": {
       "title": "Referidos de 5 Niveles",
@@ -82,7 +82,7 @@
       "step1": "1. Deposita USDT (mínimo 2 USDT)",
       "step2": "2. Los fondos irán a tu saldo disponible",
       "step3": "3. Con 100+ USDT puedes crear una inversión",
-      "step4": "4. Ganas 1% de interés compuesto diario",
+      "step4": "4. Ganas 0.7758% de interés compuesto diario",
       "step5": "5. Desbloqueo a 200 USDT (100% ROI bruto)"
     },
     "afterFirstDeposit": "Después del primer depósito, este panel mostrará todos tus datos",

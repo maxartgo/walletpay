@@ -42,7 +42,7 @@
     },
     "dailyYields": {
       "title": "Daily Yield Staking",
-      "description": "Stake 100 USDT and earn 1% daily compound interest"
+      "description": "Stake 100 USDT and earn 0.7758% daily compound interest"
     },
     "referrals": {
       "title": "5-Level Referrals",
@@ -82,7 +82,7 @@
       "step1": "1. Deposit USDT (minimum 2 USDT)",
       "step2": "2. Funds will go to your available balance",
       "step3": "3. With 100+ USDT you can create an investment",
-      "step4": "4. Earn 1% daily compound interest",
+      "step4": "4. Earn 0.7758% daily compound interest",
       "step5": "5. Unlock at 200 USDT (100% gross ROI)"
     },
     "afterFirstDeposit": "After the first deposit, this dashboard will show all your data",
