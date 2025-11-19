@@ -1,0 +1,173 @@
+import { useState, useEffect } from 'react';
+import { useWallet } from '../contexts/WalletContext';
+import { useLanguage } from '../contexts/LanguageContext';
+import { apiService } from '../services/api';
+
+interface ReferralWithdrawFormProps {
+  onSuccess?: () => void;
+}
+
+export const ReferralWithdrawForm = ({ onSuccess }: ReferralWithdrawFormProps) => {
+  const { address, isConnected } = useWallet();
+  const { t } = useLanguage();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [withdrawableData, setWithdrawableData] = useState<any>(null);
+  const [loadingData, setLoadingData] = useState(true);
+
+  useEffect(() => {
+    if (isConnected && address) {
+      loadReferralWithdrawableAmount();
+    }
+  }, [isConnected, address]);
+
+  const loadReferralWithdrawableAmount = async () => {
+    if (!address) return;
+
+    try {
+      setLoadingData(true);
+      const data = await apiService.getReferralWithdrawableAmount(address);
+      setWithdrawableData(data);
+    } catch (err) {
+      console.error('Error loading referral withdrawable amount:', err);
+    } finally {
+      setLoadingData(false);
+    }
+  };
+
+  const handleWithdraw = async () => {
+    setError('');
+    setSuccess('');
+
+    if (!isConnected || !address) {
+      setError(t('errors.connectWallet'));
+      return;
+    }
+
+    if (!withdrawableData || !withdrawableData.canWithdraw) {
+      setError(t('withdrawal.noReferralBalance'));
+      return;
+    }
+
+    const { grossAmount, taxAmount, netAmount } = withdrawableData;
+
+    // Show confirmation with tax details
+    const confirmed = window.confirm(
+      t('withdrawal.confirmReferralMessage', {
+        gross: Number(grossAmount).toFixed(2),
+        tax: Number(taxAmount).toFixed(2),
+        net: Number(netAmount).toFixed(2)
+      })
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setLoading(true);
+
+      const result = await apiService.createReferralWithdrawal(address);
+
+      if (result.success) {
+        setSuccess(
+          t('withdrawal.referralSuccessMessage', {
+            gross: Number(result.grossAmount).toFixed(2),
+            tax: Number(result.taxAmount).toFixed(2),
+            net: Number(result.netAmount).toFixed(2)
+          })
+        );
+
+        if (onSuccess) {
+          setTimeout(() => onSuccess(), 3000);
+        }
+      } else {
+        setError(result.message || t('errors.referralWithdrawalError'));
+      }
+    } catch (err: any) {
+      console.error('Referral withdrawal error:', err);
+      setError(err.response?.data?.message || t('errors.referralWithdrawalError'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isConnected) {
+    return null;
+  }
+
+  if (loadingData) {
+    return (
+      <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg p-6 border border-purple-500/30">
+        <p className="text-center text-gray-400">{t('withdrawal.loadingReferralData')}</p>
+      </div>
+    );
+  }
+
+  if (!withdrawableData) {
+    return (
+      <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg p-6 border border-purple-500/30">
+        <p className="text-center text-red-400">{t('errors.loadingError')}</p>
+      </div>
+    );
+  }
+
+  const { grossAmount, taxAmount, netAmount, canWithdraw } = withdrawableData;
+  const gross = Number(grossAmount);
+  const tax = Number(taxAmount);
+  const net = Number(netAmount);
+
+  return (
+    <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg p-6 border border-purple-500/30">
+      <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+        💰 {t('withdrawal.withdrawReferral')}
+      </h3>
+
+      <div className="space-y-4">
+        {/* Amount Display */}
+        <div className="bg-gray-800/50 rounded-lg p-4">
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-gray-300">{t('dashboard.referralBalance')}:</span>
+              <span className="text-purple-400 font-medium">{gross.toFixed(2)} USDT</span>
+            </div>
+            <div className="flex justify-between text-yellow-400">
+              <span>{t('withdrawal.tax')}:</span>
+              <span className="font-medium">-{tax.toFixed(2)} USDT</span>
+            </div>
+            <div className="border-t border-gray-700 my-2" />
+            <div className="flex justify-between">
+              <span className="text-purple-400 font-bold text-lg">{t('withdrawal.youReceive')}:</span>
+              <span className="text-purple-400 font-bold text-lg">{net.toFixed(2)} USDT</span>
+            </div>
+          </div>
+        </div>
+
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-400 text-sm">
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3 text-green-400 text-sm whitespace-pre-line">
+            {success}
+          </div>
+        )}
+
+        <button
+          onClick={handleWithdraw}
+          disabled={loading || !canWithdraw}
+          className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-600 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg"
+        >
+          {loading ? `⏳ ${t('withdrawal.processing')}` : !canWithdraw ? `❌ ${t('withdrawal.noReferralBalance')}` : `💸 ${t('withdrawal.withdraw')} ${net.toFixed(2)} USDT`}
+        </button>
+
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+          <p className="text-xs text-purple-300">
+            ⚠️ {t('withdrawal.referralWarning')}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -1,0 +1,282 @@
+import { query } from '../config/database.js';
+
+export interface User {
+  id: number;
+  wallet_address: string;
+  referrer_address?: string;
+  total_deposited: number;
+  total_referral_earned: number;
+  available_balance: number;
+  referral_balance: number;
+  locked_profits: number;
+  total_withdrawn: number;
+  direct_referrals: number;
+  level2_referrals: number;
+  level3_referrals: number;
+  level4_referrals: number;
+  level5_referrals: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export class UserModel {
+  /**
+   * Find user by wallet address
+   */
+  static async findByWallet(walletAddress: string): Promise<User | null> {
+    const result = await query(
+      'SELECT * FROM users WHERE LOWER(wallet_address) = LOWER($1)',
+      [walletAddress]
+    );
+    return result.rows[0] || null;
+  }
+
+  /**
+   * Find user by ID
+   */
+  static async findById(userId: number): Promise<User | null> {
+    const result = await query(
+      'SELECT * FROM users WHERE id = $1',
+      [userId]
+    );
+    return result.rows[0] || null;
+  }
+
+  /**
+   * Create new user
+   */
+  static async create(walletAddress: string, referrerAddress?: string): Promise<User> {
+    const result = await query(
+      `INSERT INTO users (wallet_address, referrer_address)
+       VALUES ($1, $2)
+       RETURNING *`,
+      [walletAddress, referrerAddress || null]
+    );
+
+    console.log(`👤 New user created: ${walletAddress}`);
+    return result.rows[0];
+  }
+
+  /**
+   * Add deposit to available balance
+   */
+  static async addDeposit(userId: number, amount: number): Promise<User> {
+    const result = await query(
+      `UPDATE users
+       SET total_deposited = total_deposited + $1,
+           available_balance = available_balance + $1
+       WHERE id = $2
+       RETURNING *`,
+      [amount, userId]
+    );
+
+    console.log(`💰 Deposit added: ${amount} USDT → available_balance`);
+    return result.rows[0];
+  }
+
+  /**
+   * Add referral earning
+   */
+  static async addReferralEarning(userId: number, amount: number, level: number): Promise<User> {
+    const columnMap: { [key: number]: string } = {
+      1: 'direct_referrals',
+      2: 'level2_referrals',
+      3: 'level3_referrals',
+      4: 'level4_referrals',
+      5: 'level5_referrals',
+    };
+
+    const result = await query(
+      `UPDATE users
+       SET total_referral_earned = total_referral_earned + $1,
+           referral_balance = referral_balance + $1,
+           ${columnMap[level]} = ${columnMap[level]} + 1
+       WHERE id = $2
+       RETURNING *`,
+      [amount, userId]
+    );
+
+    console.log(`🤝 Referral earning: Level ${level}, ${amount} USDT`);
+    return result.rows[0];
+  }
+
+  /**
+   * Create investment from available funds (100 USDT)
+   */
+  static async createInvestment(userId: number): Promise<User> {
+    const user = await this.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const totalAvailable = user.available_balance + user.referral_balance;
+    if (totalAvailable < 100) {
+      throw new Error('Insufficient balance for investment');
+    }
+
+    // Deduct 100 USDT from balances (referral first, then available)
+    let remaining = 100;
+    let newReferralBalance = user.referral_balance;
+    let newAvailableBalance = user.available_balance;
+
+    if (newReferralBalance >= remaining) {
+      newReferralBalance -= remaining;
+    } else {
+      remaining -= newReferralBalance;
+      newReferralBalance = 0;
+      newAvailableBalance -= remaining;
+    }
+
+    const result = await query(
+      `UPDATE users
+       SET available_balance = $1,
+           referral_balance = $2
+       WHERE id = $3
+       RETURNING *`,
+      [newAvailableBalance, newReferralBalance, userId]
+    );
+
+    console.log(`🚀 Investment created: -100 USDT from balances`);
+    return result.rows[0];
+  }
+
+  /**
+   * Add locked profits (from reinvestments)
+   */
+  static async addLockedProfits(userId: number, amount: number): Promise<User> {
+    const result = await query(
+      `UPDATE users
+       SET locked_profits = locked_profits + $1
+       WHERE id = $2
+       RETURNING *`,
+      [amount, userId]
+    );
+
+    console.log(`🔒 Locked profits: +${amount} USDT`);
+    return result.rows[0];
+  }
+
+  /**
+   * Process withdrawal (reset all balances)
+   */
+  static async processWithdrawal(userId: number, amount: number): Promise<User> {
+    const result = await query(
+      `UPDATE users
+       SET available_balance = 0,
+           referral_balance = 0,
+           locked_profits = 0,
+           total_withdrawn = total_withdrawn + $1
+       WHERE id = $2
+       RETURNING *`,
+      [amount, userId]
+    );
+
+    console.log(`💸 Withdrawal processed: ${amount} USDT (net after tax)`);
+    return result.rows[0];
+  }
+
+  /**
+   * Process REFERRAL withdrawal (reset only referral balance)
+   */
+  static async processReferralWithdrawal(userId: number, amount: number): Promise<User> {
+    const result = await query(
+      `UPDATE users
+       SET referral_balance = 0,
+           total_withdrawn = total_withdrawn + $1
+       WHERE id = $2
+       RETURNING *`,
+      [amount, userId]
+    );
+
+    console.log(`💰 Referral withdrawal processed: ${amount} USDT (net after tax)`);
+    return result.rows[0];
+  }
+
+  /**
+   * Get referral chain (up to 5 levels)
+   */
+  static async getReferralChain(walletAddress: string, maxLevel: number = 5): Promise<User[]> {
+    const chain: User[] = [];
+    let currentWallet = walletAddress;
+
+    for (let i = 0; i < maxLevel; i++) {
+      const user = await this.findByWallet(currentWallet);
+      if (!user || !user.referrer_address) break;
+
+      const referrer = await this.findByWallet(user.referrer_address);
+      if (!referrer) break;
+
+      chain.push(referrer);
+      currentWallet = referrer.wallet_address;
+    }
+
+    return chain;
+  }
+
+  /**
+   * Get all users
+   */
+  static async getAllUsers(): Promise<User[]> {
+    const result = await query('SELECT * FROM users ORDER BY created_at DESC');
+    return result.rows;
+  }
+
+  /**
+   * Get total available for investment
+   */
+  static async getTotalAvailable(userId: number): Promise<number> {
+    const user = await this.findById(userId);
+    if (!user) return 0;
+
+    return user.available_balance + user.referral_balance;
+  }
+
+  /**
+   * Get user statistics
+   */
+  static async getUserStats(userId: number) {
+    const user = await this.findById(userId);
+    if (!user) return null;
+
+    const totalAvailable = user.available_balance + user.referral_balance;
+    const canInvest = totalAvailable >= 100;
+
+    return {
+      user,
+      totalAvailable,
+      canInvest,
+      referralStats: {
+        total: user.total_referral_earned,
+        level1: user.direct_referrals,
+        level2: user.level2_referrals,
+        level3: user.level3_referrals,
+        level4: user.level4_referrals,
+        level5: user.level5_referrals,
+      },
+    };
+  }
+
+  /**
+   * Refund withdrawal (admin rejected withdrawal)
+   */
+  static async refundWithdrawal(userId: number, amount: number): Promise<User> {
+    const result = await query(
+      `UPDATE users
+       SET available_balance = available_balance + $1
+       WHERE id = $2
+       RETURNING *`,
+      [amount, userId]
+    );
+
+    console.log(`💰 Refunded ${amount} USDT to user ${userId}`);
+    return result.rows[0];
+  }
+
+  /**
+   * Get total users count
+   */
+  static async getTotalUsers(): Promise<number> {
+    const result = await query('SELECT COUNT(*) as count FROM users');
+    return parseInt(result.rows[0].count);
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "common": {
+    "connect": "Connetti Wallet",
+    "disconnect": "Disconnetti",
+    "connecting": "Connessione...",
+    "switchToBSC": "Passa a BSC",
+    "loading": "Caricamento...",
+    "loadingStats": "Caricamento statistiche",
+    "error": "Errore",
+    "success": "Successo",
+    "confirm": "Conferma",
+    "cancel": "Annulla",
+    "close": "Chiudi",
+    "approve": "Approva",
+    "reject": "Rifiuta",
+    "pending": "In attesa",
+    "completed": "Completato",
+    "rejected": "Rifiutato",
+    "all": "Tutti",
+    "retry": "Riprova",
+    "noStats": "Nessuna statistica disponibile"
+  },
+  "wallet": {
+    "selectWallet": "Seleziona Wallet",
+    "noWalletFound": "Nessun wallet trovato",
+    "installWallet": "Installa MetaMask, Phantom o un altro wallet compatibile",
+    "detected": "Rilevato",
+    "secureConnection": "Connessione sicura tramite Web3"
+  },
+  "header": {
+    "title": "WalletPay",
+    "subtitle": "Piattaforma DeFi Educativa"
+  },
+  "hero": {
+    "title": "Piattaforma di Staking Decentralizzata",
+    "subtitle": "Deposita USDT, guadagna rendimenti giornalieri e ottieni ricompense per i referral. Costruita su BNB Smart Chain per scopi educativi."
+  },
+  "features": {
+    "secureDeposits": {
+      "title": "Depositi Sicuri",
+      "description": "Tutte le transazioni sono on-chain e trasparenti su BNB Smart Chain"
+    },
+    "dailyYields": {
+      "title": "Staking con Yield Giornaliero",
+      "description": "Metti in staking 100 USDT e guadagna lo 0.7758% compound giornaliero (90 giorni per 100% ROI)"
+    },
+    "referrals": {
+      "title": "Referral a 5 Livelli",
+      "description": "Guadagna commissioni su 5 livelli: 10%, 5%, 3%, 2%, 1%"
+    }
+  },
+  "dashboard": {
+    "balance": "Saldo",
+    "available": "Disponibile",
+    "referral": "Referral",
+    "walletBalance": "Saldo Wallet",
+    "myAccount": "Il Mio Account",
+    "availableBalance": "Saldo Disponibile",
+    "referralBalance": "Saldo Referral",
+    "lockedProfits": "Profitti Bloccati",
+    "totalDeposited": "Totale Depositato",
+    "totalReferralEarned": "Totale Referral Guadagnati",
+    "totalWithdrawn": "Totale Prelevato",
+    "referralNetwork": "Network Referral",
+    "level": "Livello",
+    "yourReferralLink": "Il Tuo Link Referral",
+    "copy": "Copia",
+    "linkCopied": "✅ Link copiato negli appunti!",
+    "shareLink": "Condividi questo link per guadagnare commissioni: 10% (L1), 5% (L2), 3% (L3), 2% (L4), 1% (L5)",
+    "stakingSummary": "Riepilogo Staking",
+    "totalStaked": "Totale in Staking",
+    "currentValue": "Valore Attuale",
+    "totalYield": "Yield Totale",
+    "activeStakings": "Staking Attivi",
+    "unlockedStakings": "Staking Sbloccati",
+    "connectWallet": "Connetti il tuo wallet per vedere la dashboard",
+    "welcome": "Benvenuto!",
+    "noDeposits": "Il tuo wallet è connesso ma non hai ancora effettuato depositi.",
+    "wallet": "Wallet",
+    "gettingStarted": {
+      "title": "Per iniziare:",
+      "step1": "1. Deposita USDT (minimo 2 USDT)",
+      "step2": "2. I fondi andranno nel tuo saldo disponibile",
+      "step3": "3. Con 100+ USDT puoi creare un investimento",
+      "step4": "4. Guadagni 1% compound giornaliero",
+      "step5": "5. Sblocco a 200 USDT (100% ROI lordo)"
+    },
+    "afterFirstDeposit": "Dopo il primo deposito, questa dashboard mostrerà tutti i tuoi dati",
+    "reinvestSuccess": "✅ Reinvestimento completato!\n\nProfitti bloccati: {lockedProfit} USDT\nNuovo investimento: 100 USDT creato"
+  },
+  "staking": {
+    "createNew": "Crea Nuovo Staking",
+    "totalAvailable": "Totale Disponibile",
+    "details": "Dettagli Staking",
+    "fixedAmount": "Importo Fisso",
+    "dailyYield": "Rendimento Giornaliero",
+    "yieldGoal": "Yield Obiettivo",
+    "unlockValue": "Valore Sblocco",
+    "estimatedTime": "Tempo Stimato",
+    "days": "giorni",
+    "creating": "Creazione in corso...",
+    "insufficientBalance": "Saldo insufficiente (min 100 USDT)",
+    "stake100": "Metti in Staking 100 USDT",
+    "missing": "Ti mancano {amount} USDT per mettere in staking",
+    "stakingNumber": "Staking #{id}",
+    "stakedAmount": "Importo in Staking",
+    "yieldEarned": "Yield Guadagnato",
+    "daysElapsed": "Giorni Trascorsi",
+    "progress": "Progresso",
+    "reinvest100": "Reinvesti 100 USDT",
+    "reinvesting": "Reinvestimento...",
+    "reinvestNote": "Reinvestendo, {amount} USDT saranno bloccati come profitti",
+    "unlockedMessage": "Staking sbloccato! Puoi prelevare o reinvestire",
+    "status": {
+      "active": "Attivo",
+      "unlocked": "Sbloccato",
+      "withdrawn": "Ritirato"
+    }
+  },
+  "withdrawal": {
+    "withdrawFunds": "Preleva Fondi",
+    "withdrawReferral": "Preleva Referral",
+    "fundsBreakdown": "Composizione Fondi Personali",
+    "unlockedStakings": "Staking Sbloccati",
+    "grossAmount": "Importo Lordo",
+    "tax": "Tassa (20%)",
+    "youReceive": "Riceverai",
+    "processing": "Elaborazione...",
+    "noFunds": "Nessun fondo disponibile",
+    "noReferralBalance": "Nessun saldo referral",
+    "withdraw": "Preleva",
+    "warning": "Il prelievo include SOLO i tuoi fondi personali (disponibile + profitti bloccati + investimenti sbloccati). Il saldo referral può essere prelevato separatamente. Una tassa del 20% viene applicata sull'importo totale. Tutti i saldi personali verranno azzerati dopo il prelievo.",
+    "referralWarning": "Il prelievo referral preleva SOLO il saldo delle commissioni referral. I tuoi fondi personali (disponibile, profitti bloccati, investimenti) rimangono intatti.",
+    "loadingData": "Caricamento dati prelievo...",
+    "loadingReferralData": "Caricamento dati referral...",
+    "confirmMessage": "⚠️ Conferma Prelievo\n\nImporto Lordo: {gross} USDT\nTassa (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nImporto Netto: {net} USDT\n\nTutti i tuoi saldi verranno azzerati.\nVuoi procedere?",
+    "confirmReferralMessage": "⚠️ Conferma Prelievo Referral\n\nImporto Lordo: {gross} USDT\nTassa (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nImporto Netto: {net} USDT\n\nIl tuo saldo referral verrà azzerato.\nVuoi procedere?",
+    "successMessage": "✅ Richiesta di Prelievo Creata!\n\nLordo: {gross} USDT\nTassa (20%): -{tax} USDT\nNetto: {net} USDT\n\nI fondi saranno inviati al tuo wallet.",
+    "referralSuccessMessage": "✅ Prelievo Referral Creato!\n\nLordo: {gross} USDT\nTassa (20%): -{tax} USDT\nNetto: {net} USDT\n\nI fondi saranno inviati al tuo wallet."
+  },
+  "deposit": {
+    "title": "Effettua un Deposito",
+    "amount": "Importo (USDT)",
+    "available": "Disponibile",
+    "referrer": "Indirizzo Referrer (Opzionale)",
+    "autoFilled": "Compilato automaticamente dal link",
+    "referrerDetected": "Referrer rilevato! Guadagnerà una commissione dal tuo deposito.",
+    "referrerHelp": "Inserisci l'indirizzo wallet di chi ti ha invitato per fargli guadagnare una commissione",
+    "processing": "Elaborazione...",
+    "submit": "Deposita USDT",
+    "success": "Deposito riuscito! 🎉",
+    "txSent": "Transazione inviata! Hash: {txHash}",
+    "info": {
+      "title": "Informazioni Importanti",
+      "destination": "I depositi vengono inviati a: {wallet}...",
+      "rewards": "Guadagni ricompense referral quando le persone usano il tuo indirizzo",
+      "yields": "I rendimenti giornalieri si sbloccano al raggiungimento degli obiettivi",
+      "educational": "Questo è un progetto educativo solo a scopo di test"
+    }
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "management": "WalletPay Management",
+    "connectPrompt": "Connetti il tuo wallet admin per accedere",
+    "connectedWallet": "Wallet connesso",
+    "loginButton": "Accedi come Admin",
+    "verifying": "Verifica in corso...",
+    "logout": "Logout",
+    "noPermission": "Il tuo wallet non ha permessi di amministratore",
+    "notAuthorized": "Wallet non autorizzato come admin",
+    "warning": "Solo i wallet autorizzati possono accedere al pannello admin. Contatta l'amministratore di sistema per ottenere l'accesso.",
+    "stats": {
+      "totalUsers": "Utenti Totali",
+      "pendingWithdrawals": "Prelievi Pending",
+      "completedWithdrawals": "Prelievi Completati",
+      "taxCollected": "Tasse Raccolte"
+    },
+    "tabs": {
+      "withdrawals": "Prelievi",
+      "users": "Utenti"
+    },
+    "filter": {
+      "pending": "Pending",
+      "completed": "Completati",
+      "rejected": "Rifiutati",
+      "all": "Tutti"
+    },
+    "withdrawal": "Prelievo",
+    "approve": "Approva",
+    "reject": "Rifiuta",
+    "enterTxHash": "Inserisci il TX Hash della transazione USDT inviata:",
+    "invalidTxHash": "TX Hash non valido",
+    "approveSuccess": "✅ Prelievo approvato con successo!",
+    "confirmReject": "⚠️ Sei sicuro di voler rifiutare questo prelievo? L'utente verrà rimborsato.",
+    "rejectSuccess": "✅ Prelievo rifiutato e utente rimborsato!",
+    "noWithdrawals": "Nessun prelievo trovato",
+    "noUsers": "Nessun utente trovato",
+    "referrals": "Referrals",
+    "status": {
+      "completed": "Completato",
+      "rejected": "Rifiutato"
+    }
+  },
+  "disclaimer": {
+    "title": "Solo Scopo Educativo",
+    "description": "Questa piattaforma è progettata per scopi educativi e di test. Piattaforma Completa: Wallet ✅ Dashboard ✅ Depositi ✅ Referral ✅"
+  },
+  "footer": {
+    "title": "WalletPay - Piattaforma DeFi Educativa",
+    "built": "Costruita con React, TypeScript, ethers.js e BNB Smart Chain"
+  },
+  "errors": {
+    "connectWallet": "Connetti prima il tuo wallet",
+    "switchToBSC": "Passa a BNB Smart Chain",
+    "invalidAmount": "Inserisci un importo valido",
+    "insufficientBalance": "Saldo USDT insufficiente. Hai {balance} USDT ma stai cercando di depositare {amount} USDT",
+    "invalidReferrer": "Indirizzo referrer non valido",
+    "depositError": "Errore durante l'elaborazione del deposito",
+    "withdrawalError": "Errore durante il prelievo",
+    "referralWithdrawalError": "Errore durante il prelievo referral",
+    "investmentError": "Errore durante la creazione dell'investimento",
+    "reinvestError": "Errore durante il reinvestimento",
+    "loadingError": "Errore nel caricamento dei dati",
+    "statsError": "Errore nel caricamento delle statistiche"
+  },
+  "stats": {
+    "totalDeposits": "Depositi Totali",
+    "payingWallets": "Wallet Paganti",
+    "totalUsers": "Utenti Totali",
+    "withdrawalsStatus": "Stato Prelievi",
+    "unlocked": "Sbloccato",
+    "locked": "Bloccato"
+  }
+}

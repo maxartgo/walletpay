@@ -1,0 +1,234 @@
+{
+  "common": {
+    "connect": "Conectar Billetera",
+    "disconnect": "Desconectar",
+    "connecting": "Conectando...",
+    "switchToBSC": "Cambiar a BSC",
+    "loading": "Cargando...",
+    "loadingStats": "Cargando estadísticas",
+    "error": "Error",
+    "success": "Éxito",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "pending": "Pendiente",
+    "completed": "Completado",
+    "rejected": "Rechazado",
+    "all": "Todos",
+    "retry": "Reintentar",
+    "noStats": "No hay estadísticas disponibles"
+  },
+  "wallet": {
+    "selectWallet": "Seleccionar Billetera",
+    "noWalletFound": "No se encontró billetera",
+    "installWallet": "Instala MetaMask, Phantom u otra billetera compatible",
+    "detected": "Detectado",
+    "secureConnection": "Conexión segura vía Web3"
+  },
+  "header": {
+    "title": "WalletPay",
+    "subtitle": "Plataforma DeFi Educativa"
+  },
+  "hero": {
+    "title": "Plataforma de Staking Descentralizada",
+    "subtitle": "Deposita USDT, gana rendimientos diarios y obtén recompensas por referidos. Construida en BNB Smart Chain con fines educativos."
+  },
+  "features": {
+    "secureDeposits": {
+      "title": "Depósitos Seguros",
+      "description": "Todas las transacciones están en cadena y son transparentes en BNB Smart Chain"
+    },
+    "dailyYields": {
+      "title": "Staking con Rendimiento Diario",
+      "description": "Haz staking de 100 USDT y gana 1% de interés compuesto diario"
+    },
+    "referrals": {
+      "title": "Referidos de 5 Niveles",
+      "description": "Gana comisiones en 5 niveles: 10%, 5%, 3%, 2%, 1%"
+    }
+  },
+  "dashboard": {
+    "balance": "Saldo",
+    "available": "Disponible",
+    "referral": "Referidos",
+    "walletBalance": "Saldo de Billetera",
+    "myAccount": "Mi Cuenta",
+    "availableBalance": "Saldo Disponible",
+    "referralBalance": "Saldo de Referidos",
+    "lockedProfits": "Ganancias Bloqueadas",
+    "totalDeposited": "Total Depositado",
+    "totalReferralEarned": "Total Ganado en Referidos",
+    "totalWithdrawn": "Total Retirado",
+    "referralNetwork": "Red de Referidos",
+    "level": "Nivel",
+    "yourReferralLink": "Tu Enlace de Referido",
+    "copy": "Copiar",
+    "linkCopied": "✅ ¡Enlace copiado al portapapeles!",
+    "shareLink": "Comparte este enlace para ganar comisiones: 10% (N1), 5% (N2), 3% (N3), 2% (N4), 1% (N5)",
+    "stakingSummary": "Resumen de Staking",
+    "totalStaked": "Total en Staking",
+    "currentValue": "Valor Actual",
+    "totalYield": "Rendimiento Total",
+    "activeStakings": "Stakings Activos",
+    "unlockedStakings": "Stakings Desbloqueados",
+    "connectWallet": "Conecta tu billetera para ver el panel",
+    "welcome": "¡Bienvenido!",
+    "noDeposits": "Tu billetera está conectada pero aún no has realizado depósitos.",
+    "wallet": "Billetera",
+    "gettingStarted": {
+      "title": "Para comenzar:",
+      "step1": "1. Deposita USDT (mínimo 2 USDT)",
+      "step2": "2. Los fondos irán a tu saldo disponible",
+      "step3": "3. Con 100+ USDT puedes crear una inversión",
+      "step4": "4. Ganas 1% de interés compuesto diario",
+      "step5": "5. Desbloqueo a 200 USDT (100% ROI bruto)"
+    },
+    "afterFirstDeposit": "Después del primer depósito, este panel mostrará todos tus datos",
+    "reinvestSuccess": "✅ ¡Reinversión completada!\n\nGanancias bloqueadas: {lockedProfit} USDT\nNueva inversión: 100 USDT creada"
+  },
+  "staking": {
+    "createNew": "Crear Nuevo Staking",
+    "totalAvailable": "Total Disponible",
+    "details": "Detalles del Staking",
+    "fixedAmount": "Monto Fijo",
+    "dailyYield": "Rendimiento Diario",
+    "yieldGoal": "Objetivo de Rendimiento",
+    "unlockValue": "Valor de Desbloqueo",
+    "estimatedTime": "Tiempo Estimado",
+    "days": "días",
+    "creating": "Creando...",
+    "insufficientBalance": "Saldo insuficiente (mín 100 USDT)",
+    "stake100": "Hacer Staking de 100 USDT",
+    "missing": "Te faltan {amount} USDT para hacer staking",
+    "stakingNumber": "Staking #{id}",
+    "stakedAmount": "Monto en Staking",
+    "yieldEarned": "Rendimiento Ganado",
+    "daysElapsed": "Días Transcurridos",
+    "progress": "Progreso",
+    "reinvest100": "Reinvertir 100 USDT",
+    "reinvesting": "Reinvirtiendo...",
+    "reinvestNote": "Al reinvertir, {amount} USDT se bloquearán como ganancias",
+    "unlockedMessage": "¡Staking desbloqueado! Puedes retirar o reinvertir",
+    "status": {
+      "active": "Activo",
+      "unlocked": "Desbloqueado",
+      "withdrawn": "Retirado"
+    }
+  },
+  "withdrawal": {
+    "withdrawFunds": "Retirar Fondos",
+    "withdrawReferral": "Retirar Referidos",
+    "fundsBreakdown": "Desglose de Fondos Personales",
+    "unlockedStakings": "Stakings Desbloqueados",
+    "grossAmount": "Monto Bruto",
+    "tax": "Impuesto (20%)",
+    "youReceive": "Recibirás",
+    "processing": "Procesando...",
+    "noFunds": "No hay fondos disponibles",
+    "noReferralBalance": "Sin saldo de referidos",
+    "withdraw": "Retirar",
+    "warning": "El retiro incluye SOLO tus fondos personales (disponible + ganancias bloqueadas + inversiones desbloqueadas). El saldo de referidos se puede retirar por separado. Se aplica un impuesto del 20% al monto total. Todos los saldos personales se resetearán después del retiro.",
+    "referralWarning": "El retiro de referidos retira SOLO el saldo de comisiones de referidos. Tus fondos personales (disponible, ganancias bloqueadas, inversiones) permanecen intactos.",
+    "loadingData": "Cargando datos de retiro...",
+    "loadingReferralData": "Cargando datos de referidos...",
+    "confirmMessage": "⚠️ Confirmar Retiro\n\nMonto Bruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nMonto Neto: {net} USDT\n\nTodos tus saldos se resetearán.\n¿Quieres continuar?",
+    "confirmReferralMessage": "⚠️ Confirmar Retiro de Referidos\n\nMonto Bruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nMonto Neto: {net} USDT\n\nTu saldo de referidos se reseteará.\n¿Quieres continuar?",
+    "successMessage": "✅ ¡Solicitud de Retiro Creada!\n\nBruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\nNeto: {net} USDT\n\nLos fondos se enviarán a tu billetera.",
+    "referralSuccessMessage": "✅ ¡Retiro de Referidos Creado!\n\nBruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\nNeto: {net} USDT\n\nLos fondos se enviarán a tu billetera."
+  },
+  "deposit": {
+    "title": "Realizar un Depósito",
+    "amount": "Monto (USDT)",
+    "available": "Disponible",
+    "referrer": "Dirección del Referidor (Opcional)",
+    "autoFilled": "Autocompletado desde el enlace",
+    "referrerDetected": "¡Referidor detectado! Ganará una comisión de tu depósito.",
+    "referrerHelp": "Ingresa la dirección de billetera de quien te invitó para que gane una comisión",
+    "processing": "Procesando...",
+    "submit": "Depositar USDT",
+    "success": "¡Depósito exitoso! 🎉",
+    "txSent": "¡Transacción enviada! Hash: {txHash}",
+    "info": {
+      "title": "Información Importante",
+      "destination": "Los depósitos se envían a: {wallet}...",
+      "rewards": "Gana recompensas de referidos cuando las personas usan tu dirección",
+      "yields": "Los rendimientos diarios se desbloquean cuando se alcanzan los objetivos",
+      "educational": "Este es un proyecto educativo solo para fines de prueba"
+    }
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "management": "Gestión de WalletPay",
+    "connectPrompt": "Conecta tu billetera de admin para acceder",
+    "connectedWallet": "Billetera conectada",
+    "loginButton": "Iniciar sesión como Admin",
+    "verifying": "Verificando...",
+    "logout": "Cerrar sesión",
+    "noPermission": "Tu billetera no tiene permisos de administrador",
+    "notAuthorized": "Billetera no autorizada como admin",
+    "warning": "Solo las billeteras autorizadas pueden acceder al panel de administración. Contacta al administrador del sistema para obtener acceso.",
+    "stats": {
+      "totalUsers": "Usuarios Totales",
+      "pendingWithdrawals": "Retiros Pendientes",
+      "completedWithdrawals": "Retiros Completados",
+      "taxCollected": "Impuestos Recaudados"
+    },
+    "tabs": {
+      "withdrawals": "Retiros",
+      "users": "Usuarios"
+    },
+    "filter": {
+      "pending": "Pendientes",
+      "completed": "Completados",
+      "rejected": "Rechazados",
+      "all": "Todos"
+    },
+    "withdrawal": "Retiro",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "enterTxHash": "Ingresa el TX Hash de la transacción USDT enviada:",
+    "invalidTxHash": "TX Hash inválido",
+    "approveSuccess": "✅ ¡Retiro aprobado exitosamente!",
+    "confirmReject": "⚠️ ¿Estás seguro de que quieres rechazar este retiro? El usuario será reembolsado.",
+    "rejectSuccess": "✅ ¡Retiro rechazado y usuario reembolsado!",
+    "noWithdrawals": "No se encontraron retiros",
+    "noUsers": "No se encontraron usuarios",
+    "referrals": "Referidos",
+    "status": {
+      "completed": "Completado",
+      "rejected": "Rechazado"
+    }
+  },
+  "disclaimer": {
+    "title": "Solo con Fines Educativos",
+    "description": "Esta plataforma está diseñada solo con fines educativos y de prueba. Plataforma Completa: Billetera ✅ Panel ✅ Depósitos ✅ Referidos ✅"
+  },
+  "footer": {
+    "title": "WalletPay - Plataforma DeFi Educativa",
+    "built": "Construida con React, TypeScript, ethers.js y BNB Smart Chain"
+  },
+  "errors": {
+    "connectWallet": "Conecta tu billetera primero",
+    "switchToBSC": "Cambia a BNB Smart Chain",
+    "invalidAmount": "Ingresa un monto válido",
+    "insufficientBalance": "Saldo USDT insuficiente. Tienes {balance} USDT pero estás intentando depositar {amount} USDT",
+    "invalidReferrer": "Dirección de referidor inválida",
+    "depositError": "Error procesando el depósito",
+    "withdrawalError": "Error durante el retiro",
+    "referralWithdrawalError": "Error durante el retiro de referidos",
+    "investmentError": "Error creando la inversión",
+    "reinvestError": "Error durante la reinversión",
+    "loadingError": "Error cargando datos",
+    "statsError": "Error cargando estadísticas"
+  },
+  "stats": {
+    "totalDeposits": "Depósitos Totales",
+    "payingWallets": "Billeteras Pagantes",
+    "totalUsers": "Usuarios Totales",
+    "withdrawalsStatus": "Estado de Retiros",
+    "unlocked": "Desbloqueado",
+    "locked": "Bloqueado"
+  }
+}

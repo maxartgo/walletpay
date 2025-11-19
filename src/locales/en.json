@@ -1,0 +1,234 @@
+{
+  "common": {
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "connecting": "Connecting...",
+    "switchToBSC": "Switch to BSC",
+    "loading": "Loading...",
+    "loadingStats": "Loading statistics",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "close": "Close",
+    "approve": "Approve",
+    "reject": "Reject",
+    "pending": "Pending",
+    "completed": "Completed",
+    "rejected": "Rejected",
+    "all": "All",
+    "retry": "Retry",
+    "noStats": "No statistics available"
+  },
+  "wallet": {
+    "selectWallet": "Select Wallet",
+    "noWalletFound": "No wallet found",
+    "installWallet": "Install MetaMask, Phantom or another compatible wallet",
+    "detected": "Detected",
+    "secureConnection": "Secure connection via Web3"
+  },
+  "header": {
+    "title": "WalletPay",
+    "subtitle": "Educational DeFi Platform"
+  },
+  "hero": {
+    "title": "Decentralized Staking Platform",
+    "subtitle": "Deposit USDT, earn daily yields, and get rewarded for referrals. Built on BNB Smart Chain for educational purposes."
+  },
+  "features": {
+    "secureDeposits": {
+      "title": "Secure Deposits",
+      "description": "All transactions are on-chain and transparent on BNB Smart Chain"
+    },
+    "dailyYields": {
+      "title": "Daily Yield Staking",
+      "description": "Stake 100 USDT and earn 1% daily compound interest"
+    },
+    "referrals": {
+      "title": "5-Level Referrals",
+      "description": "Earn commissions on 5 levels: 10%, 5%, 3%, 2%, 1%"
+    }
+  },
+  "dashboard": {
+    "balance": "Balance",
+    "available": "Available",
+    "referral": "Referral",
+    "walletBalance": "Wallet Balance",
+    "myAccount": "My Account",
+    "availableBalance": "Available Balance",
+    "referralBalance": "Referral Balance",
+    "lockedProfits": "Locked Profits",
+    "totalDeposited": "Total Deposited",
+    "totalReferralEarned": "Total Referral Earned",
+    "totalWithdrawn": "Total Withdrawn",
+    "referralNetwork": "Referral Network",
+    "level": "Level",
+    "yourReferralLink": "Your Referral Link",
+    "copy": "Copy",
+    "linkCopied": "✅ Link copied to clipboard!",
+    "shareLink": "Share this link to earn commissions: 10% (L1), 5% (L2), 3% (L3), 2% (L4), 1% (L5)",
+    "stakingSummary": "Staking Summary",
+    "totalStaked": "Total Staked",
+    "currentValue": "Current Value",
+    "totalYield": "Total Yield",
+    "activeStakings": "Active Stakings",
+    "unlockedStakings": "Unlocked Stakings",
+    "connectWallet": "Connect your wallet to see the dashboard",
+    "welcome": "Welcome!",
+    "noDeposits": "Your wallet is connected but you haven't made any deposits yet.",
+    "wallet": "Wallet",
+    "gettingStarted": {
+      "title": "To get started:",
+      "step1": "1. Deposit USDT (minimum 2 USDT)",
+      "step2": "2. Funds will go to your available balance",
+      "step3": "3. With 100+ USDT you can create an investment",
+      "step4": "4. Earn 1% daily compound interest",
+      "step5": "5. Unlock at 200 USDT (100% gross ROI)"
+    },
+    "afterFirstDeposit": "After the first deposit, this dashboard will show all your data",
+    "reinvestSuccess": "✅ Reinvestment completed!\n\nLocked profits: {lockedProfit} USDT\nNew investment: 100 USDT created"
+  },
+  "staking": {
+    "createNew": "Create New Staking",
+    "totalAvailable": "Total Available",
+    "details": "Staking Details",
+    "fixedAmount": "Fixed Amount",
+    "dailyYield": "Daily Yield",
+    "yieldGoal": "Yield Goal",
+    "unlockValue": "Unlock Value",
+    "estimatedTime": "Estimated Time",
+    "days": "days",
+    "creating": "Creating...",
+    "insufficientBalance": "Insufficient balance (min 100 USDT)",
+    "stake100": "Stake 100 USDT",
+    "missing": "You need {amount} USDT more to stake",
+    "stakingNumber": "Staking #{id}",
+    "stakedAmount": "Staked Amount",
+    "yieldEarned": "Yield Earned",
+    "daysElapsed": "Days Elapsed",
+    "progress": "Progress",
+    "reinvest100": "Reinvest 100 USDT",
+    "reinvesting": "Reinvesting...",
+    "reinvestNote": "By reinvesting, {amount} USDT will be locked as profits",
+    "unlockedMessage": "Staking unlocked! You can withdraw or reinvest",
+    "status": {
+      "active": "Active",
+      "unlocked": "Unlocked",
+      "withdrawn": "Withdrawn"
+    }
+  },
+  "withdrawal": {
+    "withdrawFunds": "Withdraw Funds",
+    "withdrawReferral": "Withdraw Referral",
+    "fundsBreakdown": "Personal Funds Breakdown",
+    "unlockedStakings": "Unlocked Stakings",
+    "grossAmount": "Gross Amount",
+    "tax": "Tax (20%)",
+    "youReceive": "You Will Receive",
+    "processing": "Processing...",
+    "noFunds": "No funds available",
+    "noReferralBalance": "No referral balance",
+    "withdraw": "Withdraw",
+    "warning": "Withdrawal includes ONLY your personal funds (available + locked profits + unlocked investments). Referral balance can be withdrawn separately. A 20% tax is applied to the total amount. All personal balances will be reset after withdrawal.",
+    "referralWarning": "Referral withdrawal withdraws ONLY the referral commission balance. Your personal funds (available, locked profits, investments) remain intact.",
+    "loadingData": "Loading withdrawal data...",
+    "loadingReferralData": "Loading referral data...",
+    "confirmMessage": "⚠️ Confirm Withdrawal\n\nGross Amount: {gross} USDT\nTax (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nNet Amount: {net} USDT\n\nAll your balances will be reset.\nDo you want to proceed?",
+    "confirmReferralMessage": "⚠️ Confirm Referral Withdrawal\n\nGross Amount: {gross} USDT\nTax (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nNet Amount: {net} USDT\n\nYour referral balance will be reset.\nDo you want to proceed?",
+    "successMessage": "✅ Withdrawal Request Created!\n\nGross: {gross} USDT\nTax (20%): -{tax} USDT\nNet: {net} USDT\n\nFunds will be sent to your wallet.",
+    "referralSuccessMessage": "✅ Referral Withdrawal Created!\n\nGross: {gross} USDT\nTax (20%): -{tax} USDT\nNet: {net} USDT\n\nFunds will be sent to your wallet."
+  },
+  "deposit": {
+    "title": "Make a Deposit",
+    "amount": "Amount (USDT)",
+    "available": "Available",
+    "referrer": "Referrer Address (Optional)",
+    "autoFilled": "Auto-filled from link",
+    "referrerDetected": "Referrer detected! They will earn a commission from your deposit.",
+    "referrerHelp": "Enter the wallet address of who invited you so they can earn a commission",
+    "processing": "Processing...",
+    "submit": "Deposit USDT",
+    "success": "Deposit successful! 🎉",
+    "txSent": "Transaction sent! Hash: {txHash}",
+    "info": {
+      "title": "Important Information",
+      "destination": "Deposits are sent to: {wallet}...",
+      "rewards": "Earn referral rewards when people use your address",
+      "yields": "Daily yields unlock when goals are reached",
+      "educational": "This is an educational project for testing purposes only"
+    }
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "management": "WalletPay Management",
+    "connectPrompt": "Connect your admin wallet to access",
+    "connectedWallet": "Wallet connected",
+    "loginButton": "Login as Admin",
+    "verifying": "Verifying...",
+    "logout": "Logout",
+    "noPermission": "Your wallet does not have admin permissions",
+    "notAuthorized": "Wallet not authorized as admin",
+    "warning": "Only authorized wallets can access the admin panel. Contact the system administrator for access.",
+    "stats": {
+      "totalUsers": "Total Users",
+      "pendingWithdrawals": "Pending Withdrawals",
+      "completedWithdrawals": "Completed Withdrawals",
+      "taxCollected": "Tax Collected"
+    },
+    "tabs": {
+      "withdrawals": "Withdrawals",
+      "users": "Users"
+    },
+    "filter": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "rejected": "Rejected",
+      "all": "All"
+    },
+    "withdrawal": "Withdrawal",
+    "approve": "Approve",
+    "reject": "Reject",
+    "enterTxHash": "Enter the TX Hash of the USDT transaction sent:",
+    "invalidTxHash": "Invalid TX Hash",
+    "approveSuccess": "✅ Withdrawal approved successfully!",
+    "confirmReject": "⚠️ Are you sure you want to reject this withdrawal? The user will be refunded.",
+    "rejectSuccess": "✅ Withdrawal rejected and user refunded!",
+    "noWithdrawals": "No withdrawals found",
+    "noUsers": "No users found",
+    "referrals": "Referrals",
+    "status": {
+      "completed": "Completed",
+      "rejected": "Rejected"
+    }
+  },
+  "disclaimer": {
+    "title": "Educational Purpose Only",
+    "description": "This platform is designed for educational and testing purposes only. Full Platform: Wallet ✅ Dashboard ✅ Deposits ✅ Referrals ✅"
+  },
+  "footer": {
+    "title": "WalletPay - Educational DeFi Platform",
+    "built": "Built with React, TypeScript, ethers.js, and BNB Smart Chain"
+  },
+  "errors": {
+    "connectWallet": "Connect your wallet first",
+    "switchToBSC": "Switch to BNB Smart Chain",
+    "invalidAmount": "Enter a valid amount",
+    "insufficientBalance": "Insufficient USDT balance. You have {balance} USDT but are trying to deposit {amount} USDT",
+    "invalidReferrer": "Invalid referrer address",
+    "depositError": "Error processing deposit",
+    "withdrawalError": "Error during withdrawal",
+    "referralWithdrawalError": "Error during referral withdrawal",
+    "investmentError": "Error creating investment",
+    "reinvestError": "Error during reinvestment",
+    "loadingError": "Error loading data",
+    "statsError": "Error loading statistics"
+  },
+  "stats": {
+    "totalDeposits": "Total Deposits",
+    "payingWallets": "Paying Wallets",
+    "totalUsers": "Total Users",
+    "withdrawalsStatus": "Withdrawals Status",
+    "unlocked": "Unlocked",
+    "locked": "Locked"
+  }
+}
