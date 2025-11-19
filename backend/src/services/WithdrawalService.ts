@@ -103,6 +103,19 @@ export class WithdrawalService {
 
       const { grossAmount, taxAmount, netAmount } = withdrawableData;
 
+      // Check minimum withdrawal limit (net amount after tax)
+      const minimumWithdrawal = Number(process.env.MINIMUM_WITHDRAWAL_NET) || 50;
+      if (netAmount < minimumWithdrawal) {
+        return {
+          success: false,
+          message: `Minimum withdrawal amount is ${minimumWithdrawal} USDT (net). You have ${netAmount.toFixed(2)} USDT after tax.`,
+          grossAmount,
+          taxAmount,
+          netAmount,
+          minimumRequired: minimumWithdrawal,
+        };
+      }
+
       // Create withdrawal record
       const withdrawal = await WithdrawalModel.create(
         user.id,
@@ -161,6 +174,19 @@ export class WithdrawalService {
       }
 
       const { grossAmount, taxAmount, netAmount } = withdrawableData;
+
+      // Check minimum withdrawal limit (net amount after tax)
+      const minimumWithdrawal = Number(process.env.MINIMUM_WITHDRAWAL_NET) || 50;
+      if (netAmount < minimumWithdrawal) {
+        return {
+          success: false,
+          message: `Minimum referral withdrawal amount is ${minimumWithdrawal} USDT (net). You have ${netAmount.toFixed(2)} USDT after tax.`,
+          grossAmount,
+          taxAmount,
+          netAmount,
+          minimumRequired: minimumWithdrawal,
+        };
+      }
 
       // Create withdrawal record
       const withdrawal = await WithdrawalModel.create(

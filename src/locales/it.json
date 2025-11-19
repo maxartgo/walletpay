@@ -28,7 +28,7 @@
     "secureConnection": "Connessione sicura tramite Web3"
   },
   "header": {
-    "title": "WalletPay",
+    "title": "WalletStake",
     "subtitle": "Piattaforma DeFi Educativa"
   },
   "hero": {
@@ -206,7 +206,7 @@
     "description": "Questa piattaforma è progettata per scopi educativi e di test. Piattaforma Completa: Wallet ✅ Dashboard ✅ Depositi ✅ Referral ✅"
   },
   "footer": {
-    "title": "WalletPay - Piattaforma DeFi Educativa",
+    "title": "WalletStake - Piattaforma DeFi Educativa",
     "built": "Costruita con React, TypeScript, ethers.js e BNB Smart Chain"
   },
   "errors": {
