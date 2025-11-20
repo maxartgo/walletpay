@@ -152,9 +152,9 @@ export const WithdrawForm = ({ onSuccess }: WithdrawFormProps) => {
           <div className="flex items-start gap-2">
             <span className="text-blue-400 text-lg">ℹ️</span>
             <div className="text-xs text-blue-300">
-              <strong>Limite Minimo di Prelievo:</strong> 50 USDT netti (dopo tassa 20%)
+              <strong>{t('withdrawal.minimumNotice')}</strong> {t('withdrawal.minimumAmount')}
               <br />
-              <span className="text-blue-400">Importo lordo richiesto: circa 62.5 USDT</span>
+              <span className="text-blue-400">{t('withdrawal.minimumGross')}</span>
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@ export const WithdrawForm = ({ onSuccess }: WithdrawFormProps) => {
             <div className="flex justify-between">
               <span className="text-green-400 font-bold text-lg">{t('withdrawal.youReceive')}:</span>
               <span className={`font-bold text-lg ${net >= 50 ? 'text-green-400' : 'text-red-400'}`}>
-                {net.toFixed(2)} USDT {net < 50 ? '(< 50 minimo)' : ''}
+                {net.toFixed(2)} USDT {net < 50 ? t('withdrawal.belowMinimum') : ''}
               </span>
             </div>
           </div>
