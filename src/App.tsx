@@ -1,4 +1,3 @@
-import { GlobalStats } from './components/GlobalStats';
 import { WalletButton } from './components/WalletButton';
 import { UserDashboard } from './components/UserDashboard';
 import { DepositForm } from './components/DepositForm';
@@ -47,9 +46,6 @@ function App() {
               {t('hero.subtitle')}
             </p>
           </div>
-
-          {/* Global Stats */}
-          <GlobalStats />
 
           {/* User Dashboard - Only shown when wallet connected */}
           {isConnected && (
