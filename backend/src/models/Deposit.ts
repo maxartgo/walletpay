@@ -4,29 +4,23 @@ import { Deposit } from '../types/index.js';
 export class DepositModel {
   static async create(
     userId: number,
-    walletAddress: string,
     amount: number,
     txHash: string,
-    blockNumber?: number
+    referrerId?: number
   ): Promise<Deposit> {
     const result = await query(
-      `INSERT INTO deposits (user_id, wallet_address, amount, tx_hash, block_number, status)
-       VALUES ($1, $2, $3, $4, $5, 'pending')
+      `INSERT INTO deposits (user_id, amount, tx_hash, referrer_id)
+       VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [userId, walletAddress, amount, txHash, blockNumber || null]
+      [userId, amount, txHash, referrerId || null]
     );
     return result.rows[0];
   }
 
-  static async confirmDeposit(txHash: string, blockNumber: number): Promise<Deposit> {
+  static async confirmDeposit(txHash: string): Promise<Deposit> {
     const result = await query(
-      `UPDATE deposits
-       SET status = 'confirmed',
-           confirmed_at = CURRENT_TIMESTAMP,
-           block_number = $2
-       WHERE tx_hash = $1
-       RETURNING *`,
-      [txHash, blockNumber]
+      `SELECT * FROM deposits WHERE tx_hash = $1`,
+      [txHash]
     );
     return result.rows[0];
   }
@@ -57,8 +51,7 @@ export class DepositModel {
   static async getTotalConfirmedDeposits(): Promise<number> {
     const result = await query(
       `SELECT COALESCE(SUM(amount), 0) as total
-       FROM deposits
-       WHERE status = 'confirmed'`
+       FROM deposits`
     );
     return parseFloat(result.rows[0].total);
   }

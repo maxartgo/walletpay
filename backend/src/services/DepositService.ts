@@ -47,17 +47,20 @@ export class DepositService {
         isFirstDeposit = user.total_deposited === 0;
       }
 
+      // Get referrer ID if referrer address provided
+      let referrerId: number | undefined;
+      if (referrerAddress) {
+        const referrer = await UserModel.findByWallet(referrerAddress);
+        referrerId = referrer?.id;
+      }
+
       // Create deposit record
       const deposit = await DepositModel.create(
         user.id,
-        walletAddress,
         amount,
         txHash,
-        blockNumber
+        referrerId
       );
-
-      // Confirm deposit
-      await DepositModel.confirmDeposit(txHash, blockNumber);
 
       // Add to user's available balance
       await UserModel.addDeposit(user.id, amount);
