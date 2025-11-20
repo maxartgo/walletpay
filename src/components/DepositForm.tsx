@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useWallet } from '../contexts/WalletContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { web3Service } from '../services/web3';
+import { apiService } from '../services/api';
 
 interface DepositFormProps {
   onSuccess?: () => void;
@@ -77,23 +78,13 @@ export const DepositForm = ({ onSuccess, destinationWallet }: DepositFormProps) 
       setSuccess(t('deposit.txSent', { txHash }));
 
       // Record deposit in backend
-      const response = await fetch('http://localhost:3001/api/deposits', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          walletAddress: address,
-          amount: parseFloat(amount),
-          txHash,
-          blockNumber,
-          referrerAddress: referrer || undefined,
-        }),
+      await apiService.createDeposit({
+        walletAddress: address,
+        amount: parseFloat(amount),
+        txHash,
+        blockNumber,
+        referrerAddress: referrer || undefined,
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to record deposit in backend');
-      }
 
       setSuccess(t('deposit.success'));
       setAmount('');
