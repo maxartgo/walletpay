@@ -99,7 +99,7 @@ export class InvestmentModel {
     const newYield = newValue - investment.amount;
 
     // Check if goal reached
-    let newStatus = investment.status;
+    let newStatus: 'active' | 'unlocked' | 'withdrawn' = investment.status;
     let unlockedAt = investment.unlocked_at;
 
     if (newYield >= investment.yield_goal && investment.status === 'active') {
