@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { User, GlobalStats, Deposit, Investment, Withdrawal } from '../types';
+import type { User, GlobalStats, Deposit, Withdrawal } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 

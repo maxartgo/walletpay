@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { GlobalStats } from './components/GlobalStats';
 
 function App() {
