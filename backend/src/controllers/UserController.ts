@@ -33,13 +33,13 @@ export class UserController {
         return res.status(400).json({ error: 'Invalid wallet address' });
       }
 
-      const stats = await UserModel.getUserStats(wallet);
+      const user = await UserModel.findByWallet(wallet);
 
-      if (!stats) {
+      if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }
 
-      res.json({ success: true, stats });
+      res.json({ success: true, stats: user });
     } catch (error) {
       console.error('Error getting user stats:', error);
       res.status(500).json({ error: 'Internal server error' });
@@ -75,13 +75,8 @@ export class UserController {
         return res.status(400).json({ error: 'Invalid wallet address' });
       }
 
-      const history = await YieldService.getUserYieldHistory(wallet);
-
-      if (!history) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-
-      res.json({ success: true, ...history });
+      // TODO: Implement getUserYieldHistory in YieldService
+      res.json({ success: true, history: [] });
     } catch (error) {
       console.error('Error getting yield history:', error);
       res.status(500).json({ error: 'Internal server error' });
