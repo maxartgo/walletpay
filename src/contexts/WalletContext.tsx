@@ -54,7 +54,10 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     try {
       setWalletState((prev) => ({ ...prev, isConnecting: true }));
 
-      const { address, chainId, balance } = await web3Service.connectWallet(provider);
+      // Ignore React synthetic events
+      const actualProvider = provider && typeof provider === 'object' && !provider.nativeEvent ? provider : undefined;
+
+      const { address, chainId, balance } = await web3Service.connectWallet(actualProvider);
 
       setWalletState({
         address,
