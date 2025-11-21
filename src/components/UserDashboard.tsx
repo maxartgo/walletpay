@@ -97,18 +97,19 @@ export const UserDashboard = () => {
 
   if (!user) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-8 text-center space-y-4">
-          <h2 className="text-2xl font-bold text-white">👋 {t('dashboard.welcome')}</h2>
-          <p className="text-blue-300 text-lg">
+      <div className="max-w-4xl mx-auto p-4 sm:p-6">
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 sm:p-8 text-center space-y-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-white">👋 {t('dashboard.welcome')}</h2>
+          <p className="text-blue-300 text-base sm:text-lg">
             {t('dashboard.noDeposits')}
           </p>
-          <p className="text-gray-400">
-            {t('dashboard.wallet')}: <span className="text-white font-mono">{address}</span>
-          </p>
-          <div className="bg-gray-800/50 rounded-lg p-6 mt-4">
-            <h3 className="text-white font-bold mb-3">🚀 {t('dashboard.gettingStarted.title')}</h3>
-            <ol className="text-left text-gray-300 space-y-2">
+          <div className="bg-gray-800/50 rounded-lg p-3 sm:p-4">
+            <p className="text-gray-400 text-xs sm:text-sm mb-2">{t('dashboard.wallet')}:</p>
+            <p className="text-white font-mono text-xs sm:text-sm break-all">{address}</p>
+          </div>
+          <div className="bg-gray-800/50 rounded-lg p-4 sm:p-6 mt-4">
+            <h3 className="text-white font-bold mb-3 text-sm sm:text-base">🚀 {t('dashboard.gettingStarted.title')}</h3>
+            <ol className="text-left text-gray-300 space-y-2 text-sm sm:text-base">
               <li>{t('dashboard.gettingStarted.step1')}</li>
               <li>{t('dashboard.gettingStarted.step2')}</li>
               <li>{t('dashboard.gettingStarted.step3')}</li>
@@ -116,7 +117,7 @@ export const UserDashboard = () => {
               <li>{t('dashboard.gettingStarted.step5')}</li>
             </ol>
           </div>
-          <p className="text-sm text-gray-400 mt-4">
+          <p className="text-xs sm:text-sm text-gray-400 mt-4">
             💡 {t('dashboard.afterFirstDeposit')}
           </p>
         </div>
