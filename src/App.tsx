@@ -15,18 +15,21 @@ function App() {
     <div className="min-h-screen">
       {/* Header */}
       <header className="border-b border-dark-700 bg-dark-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center text-2xl">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-2">
+            {/* Logo and Title */}
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
                 💰
               </div>
-              <div>
-                <h1 className="text-2xl font-bold gradient-text">{t('header.title')}</h1>
-                <p className="text-xs text-dark-400">{t('header.subtitle')}</p>
+              <div className="min-w-0">
+                <h1 className="text-lg sm:text-2xl font-bold gradient-text truncate">{t('header.title')}</h1>
+                <p className="text-xs text-dark-400 hidden sm:block">{t('header.subtitle')}</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+
+            {/* Actions */}
+            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
               <LanguageSelector />
               <WalletButton />
             </div>
@@ -38,11 +41,11 @@ function App() {
       <main className="container mx-auto px-4 py-8">
         <div className="space-y-8">
           {/* Hero Section */}
-          <div className="text-center py-12">
-            <h2 className="text-5xl font-bold mb-4">
+          <div className="text-center py-8 sm:py-12 px-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
               <span className="gradient-text">{t('hero.title')}</span>
             </h2>
-            <p className="text-xl text-dark-300 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-dark-300 max-w-2xl mx-auto">
               {t('hero.subtitle')}
             </p>
           </div>
