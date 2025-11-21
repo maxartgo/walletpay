@@ -81,12 +81,12 @@
       "title": "Per iniziare:",
       "step1": "1. Deposita USDT (minimo 2 USDT)",
       "step2": "2. I fondi andranno nel tuo saldo disponibile",
-      "step3": "3. Con 100+ USDT puoi creare un investimento",
+      "step3": "3. Con 100+ USDT puoi creare uno staking",
       "step4": "4. Guadagni 0.7758% compound giornaliero",
       "step5": "5. Sblocco a 200 USDT (100% ROI lordo)"
     },
     "afterFirstDeposit": "Dopo il primo deposito, questa dashboard mostrerà tutti i tuoi dati",
-    "reinvestSuccess": "✅ Reinvestimento completato!\n\nProfitti bloccati: {lockedProfit} USDT\nNuovo investimento: 100 USDT creato"
+    "reinvestSuccess": "✅ Reinvestimento completato!\n\nProfitti bloccati: {lockedProfit} USDT\nNuovo staking: 100 USDT creato"
   },
   "staking": {
     "createNew": "Crea Nuovo Staking",
@@ -129,8 +129,8 @@
     "noFunds": "Nessun fondo disponibile",
     "noReferralBalance": "Nessun saldo referral",
     "withdraw": "Preleva",
-    "warning": "Il prelievo include SOLO i tuoi fondi personali (disponibile + profitti bloccati + investimenti sbloccati). Il saldo referral può essere prelevato separatamente. Una tassa del 20% viene applicata sull'importo totale. Tutti i saldi personali verranno azzerati dopo il prelievo.",
-    "referralWarning": "Il prelievo referral preleva SOLO il saldo delle commissioni referral. I tuoi fondi personali (disponibile, profitti bloccati, investimenti) rimangono intatti.",
+    "warning": "Il prelievo include SOLO i tuoi fondi personali (disponibile + profitti bloccati + staking sbloccati). Il saldo referral può essere prelevato separatamente. Una tassa del 20% viene applicata sull'importo totale. Tutti i saldi personali verranno azzerati dopo il prelievo.",
+    "referralWarning": "Il prelievo referral preleva SOLO il saldo delle commissioni referral. I tuoi fondi personali (disponibile, profitti bloccati, staking) rimangono intatti.",
     "loadingData": "Caricamento dati prelievo...",
     "loadingReferralData": "Caricamento dati referral...",
     "minimumNotice": "Limite Minimo di Prelievo:",
@@ -222,7 +222,7 @@
     "depositError": "Errore durante l'elaborazione del deposito",
     "withdrawalError": "Errore durante il prelievo",
     "referralWithdrawalError": "Errore durante il prelievo referral",
-    "investmentError": "Errore durante la creazione dell'investimento",
+    "investmentError": "Errore durante la creazione dello staking",
     "reinvestError": "Errore durante il reinvestimento",
     "loadingError": "Errore nel caricamento dei dati",
     "statsError": "Errore nel caricamento delle statistiche"

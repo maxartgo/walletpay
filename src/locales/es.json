@@ -81,12 +81,12 @@
       "title": "Para comenzar:",
       "step1": "1. Deposita USDT (mínimo 2 USDT)",
       "step2": "2. Los fondos irán a tu saldo disponible",
-      "step3": "3. Con 100+ USDT puedes crear una inversión",
+      "step3": "3. Con 100+ USDT puedes crear un staking",
       "step4": "4. Ganas 0.7758% de interés compuesto diario",
       "step5": "5. Desbloqueo a 200 USDT (100% ROI bruto)"
     },
     "afterFirstDeposit": "Después del primer depósito, este panel mostrará todos tus datos",
-    "reinvestSuccess": "✅ ¡Reinversión completada!\n\nGanancias bloqueadas: {lockedProfit} USDT\nNueva inversión: 100 USDT creada"
+    "reinvestSuccess": "✅ ¡Reinversión completada!\n\nGanancias bloqueadas: {lockedProfit} USDT\nNuevo staking: 100 USDT creado"
   },
   "staking": {
     "createNew": "Crear Nuevo Staking",
@@ -129,8 +129,8 @@
     "noFunds": "No hay fondos disponibles",
     "noReferralBalance": "Sin saldo de referidos",
     "withdraw": "Retirar",
-    "warning": "El retiro incluye SOLO tus fondos personales (disponible + ganancias bloqueadas + inversiones desbloqueadas). El saldo de referidos se puede retirar por separado. Se aplica un impuesto del 20% al monto total. Todos los saldos personales se resetearán después del retiro.",
-    "referralWarning": "El retiro de referidos retira SOLO el saldo de comisiones de referidos. Tus fondos personales (disponible, ganancias bloqueadas, inversiones) permanecen intactos.",
+    "warning": "El retiro incluye SOLO tus fondos personales (disponible + ganancias bloqueadas + stakings desbloqueados). El saldo de referidos se puede retirar por separado. Se aplica un impuesto del 20% al monto total. Todos los saldos personales se resetearán después del retiro.",
+    "referralWarning": "El retiro de referidos retira SOLO el saldo de comisiones de referidos. Tus fondos personales (disponible, ganancias bloqueadas, stakings) permanecen intactos.",
     "loadingData": "Cargando datos de retiro...",
     "loadingReferralData": "Cargando datos de referidos...",
     "minimumNotice": "Límite Mínimo de Retiro:",
@@ -222,7 +222,7 @@
     "depositError": "Error procesando el depósito",
     "withdrawalError": "Error durante el retiro",
     "referralWithdrawalError": "Error durante el retiro de referidos",
-    "investmentError": "Error creando la inversión",
+    "investmentError": "Error creando el staking",
     "reinvestError": "Error durante la reinversión",
     "loadingError": "Error cargando datos",
     "statsError": "Error cargando estadísticas"

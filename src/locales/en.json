@@ -81,12 +81,12 @@
       "title": "To get started:",
       "step1": "1. Deposit USDT (minimum 2 USDT)",
       "step2": "2. Funds will go to your available balance",
-      "step3": "3. With 100+ USDT you can create an investment",
+      "step3": "3. With 100+ USDT you can create a staking",
       "step4": "4. Earn 0.7758% daily compound interest",
       "step5": "5. Unlock at 200 USDT (100% gross ROI)"
     },
     "afterFirstDeposit": "After the first deposit, this dashboard will show all your data",
-    "reinvestSuccess": "✅ Reinvestment completed!\n\nLocked profits: {lockedProfit} USDT\nNew investment: 100 USDT created"
+    "reinvestSuccess": "✅ Reinvestment completed!\n\nLocked profits: {lockedProfit} USDT\nNew staking: 100 USDT created"
   },
   "staking": {
     "createNew": "Create New Staking",
@@ -129,8 +129,8 @@
     "noFunds": "No funds available",
     "noReferralBalance": "No referral balance",
     "withdraw": "Withdraw",
-    "warning": "Withdrawal includes ONLY your personal funds (available + locked profits + unlocked investments). Referral balance can be withdrawn separately. A 20% tax is applied to the total amount. All personal balances will be reset after withdrawal.",
-    "referralWarning": "Referral withdrawal withdraws ONLY the referral commission balance. Your personal funds (available, locked profits, investments) remain intact.",
+    "warning": "Withdrawal includes ONLY your personal funds (available + locked profits + unlocked stakings). Referral balance can be withdrawn separately. A 20% tax is applied to the total amount. All personal balances will be reset after withdrawal.",
+    "referralWarning": "Referral withdrawal withdraws ONLY the referral commission balance. Your personal funds (available, locked profits, stakings) remain intact.",
     "loadingData": "Loading withdrawal data...",
     "loadingReferralData": "Loading referral data...",
     "minimumNotice": "Minimum Withdrawal Limit:",
@@ -222,7 +222,7 @@
     "depositError": "Error processing deposit",
     "withdrawalError": "Error during withdrawal",
     "referralWithdrawalError": "Error during referral withdrawal",
-    "investmentError": "Error creating investment",
+    "investmentError": "Error creating staking",
     "reinvestError": "Error during reinvestment",
     "loadingError": "Error loading data",
     "statsError": "Error loading statistics"
