@@ -12,7 +12,8 @@
     "fix:referral": "tsx scripts/fix-referral-deposit.ts",
     "list:users": "tsx scripts/list-users.ts",
     "create:referrer": "tsx scripts/create-referrer.ts",
-    "assign:referrer": "tsx scripts/assign-referrer-to-user.ts"
+    "assign:referrer": "tsx scripts/assign-referrer-to-user.ts",
+    "credit:referral": "tsx scripts/credit-referral-manually.ts"
   },
   "keywords": [
     "web3",
