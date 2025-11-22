@@ -6,8 +6,8 @@
 import { pool } from '../src/config/database.js';
 import { UserModel } from '../src/models/User.js';
 
-const REFERRER_ADDRESS = '0xfbe8b060e1eb88987d65039b6f6c27d90505ed02'; // Il referrer
-const USER_ADDRESS = '0x116853cbc68a04ed96510f73a61ce0d9b6e293a4'; // L'utente che riceverà il referrer
+const REFERRER_ADDRESS = '0x116853cbc68a04ed96510f73a61ce0d9b6e293a4'; // Il referrer
+const USER_ADDRESS = '0xfbe8b060e1eb88987d65039b6f6c27d90505ed02'; // L'utente che riceverà il referrer
 
 async function assignReferrer() {
   try {
