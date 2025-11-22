@@ -70,14 +70,18 @@ export class DepositService {
 
       console.log(`💰 Deposit added: ${amount} USDT → available_balance`);
 
-      // Process referral rewards
-      if (user.referrer_address) {
+      // Process referral rewards - use the user's saved referrer_address OR the one passed in the deposit
+      const effectiveReferrer = user.referrer_address || referrerAddress;
+      if (effectiveReferrer) {
+        console.log(`🔗 Processing referral rewards for referrer: ${effectiveReferrer}`);
         await ReferralService.processReferralRewards(
           walletAddress,
           deposit.id,
           amount,
           user.id
         );
+      } else {
+        console.log(`ℹ️ No referrer for this deposit`);
       }
 
       // Get updated user info

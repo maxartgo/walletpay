@@ -46,6 +46,7 @@ const depositLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 20, // Max 20 deposits per hour
   message: 'Too many deposit requests, please try again later.',
+  skip: (req) => req.method === 'GET', // Don't limit GET requests
 });
 
 // Apply rate limiters
