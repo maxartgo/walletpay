@@ -28,8 +28,9 @@ async function checkUserStaking() {
 
     // 2. Trova gli investimenti/staking
     const investments = await pool.query(`
-      SELECT id, amount, current_value, daily_yield, days_elapsed,
-             unlock_value, status, created_at, unlocked_at
+      SELECT id, amount, current_value, yield_earned, daily_percentage,
+             yield_goal, status, created_at, unlocked_at,
+             EXTRACT(DAY FROM (CURRENT_TIMESTAMP - created_at)) as days_elapsed
       FROM investments
       WHERE user_id = $1
       ORDER BY created_at DESC
@@ -46,9 +47,10 @@ async function checkUserStaking() {
       console.log(`${index + 1}. Staking ID: ${inv.id}`);
       console.log(`   Amount: ${inv.amount} USDT`);
       console.log(`   Current Value: ${inv.current_value} USDT`);
-      console.log(`   Daily Yield: ${inv.daily_yield} USDT`);
-      console.log(`   Days Elapsed: ${inv.days_elapsed}`);
-      console.log(`   Unlock Value: ${inv.unlock_value} USDT`);
+      console.log(`   Yield Earned: ${inv.yield_earned} USDT`);
+      console.log(`   Daily Percentage: ${inv.daily_percentage}%`);
+      console.log(`   Days Elapsed: ${Math.floor(inv.days_elapsed)}`);
+      console.log(`   Yield Goal: ${inv.yield_goal} USDT`);
       console.log(`   Status: ${inv.status}`);
       console.log(`   Created: ${inv.created_at}`);
       if (inv.unlocked_at) {
