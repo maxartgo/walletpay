@@ -25,7 +25,7 @@ export class InvestmentModel {
         user_id, amount, current_value, yield_earned,
         daily_percentage, yield_goal, status, last_yield_calculated_at
       )
-      VALUES ($1, 100, 100, 0, 1.0, 100, 'active', CURRENT_TIMESTAMP)
+      VALUES ($1, 100, 100, 0, 0.7758, 100, 'active', CURRENT_TIMESTAMP)
       RETURNING *`,
       [userId]
     );

@@ -14,7 +14,8 @@
     "create:referrer": "tsx scripts/create-referrer.ts",
     "assign:referrer": "tsx scripts/assign-referrer-to-user.ts",
     "credit:referral": "tsx scripts/credit-referral-manually.ts",
-    "check:staking": "tsx scripts/check-user-staking.ts"
+    "check:staking": "tsx scripts/check-user-staking.ts",
+    "fix:daily-percentage": "tsx scripts/fix-daily-percentage.ts"
   },
   "keywords": [
     "web3",
