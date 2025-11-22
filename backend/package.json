@@ -13,7 +13,8 @@
     "list:users": "tsx scripts/list-users.ts",
     "create:referrer": "tsx scripts/create-referrer.ts",
     "assign:referrer": "tsx scripts/assign-referrer-to-user.ts",
-    "credit:referral": "tsx scripts/credit-referral-manually.ts"
+    "credit:referral": "tsx scripts/credit-referral-manually.ts",
+    "check:staking": "tsx scripts/check-user-staking.ts"
   },
   "keywords": [
     "web3",
