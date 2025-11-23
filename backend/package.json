@@ -17,7 +17,8 @@
     "check:staking": "tsx scripts/check-user-staking.ts",
     "fix:daily-percentage": "tsx scripts/fix-daily-percentage.ts",
     "check:referral-issue": "tsx scripts/check-referral-issue.ts",
-    "fix:missing-referrals": "tsx scripts/fix-missing-referrals.ts"
+    "fix:missing-referrals": "tsx scripts/fix-missing-referrals.ts",
+    "check:tables": "tsx scripts/check-table-structure.ts"
   },
   "keywords": [
     "web3",
