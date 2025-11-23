@@ -71,7 +71,7 @@ async function processReferralRewards(
     // Verifica se già esiste questo earning
     const existingEarning = await pool.query(
       `SELECT * FROM referral_earnings
-       WHERE user_id = $1 AND from_user_id = $2 AND deposit_id = $3 AND level = $4`,
+       WHERE referrer_id = $1 AND referee_id = $2 AND deposit_id = $3 AND level = $4`,
       [referrer.id, userId, depositId, levelConfig.level]
     );
 
@@ -82,9 +82,9 @@ async function processReferralRewards(
 
     // Crea referral earning record
     await pool.query(
-      `INSERT INTO referral_earnings (user_id, from_user_id, deposit_id, level, percentage, amount)
-       VALUES ($1, $2, $3, $4, $5, $6)`,
-      [referrer.id, userId, depositId, levelConfig.level, levelConfig.percentage, rewardAmount]
+      `INSERT INTO referral_earnings (referrer_id, referee_id, deposit_id, level, amount)
+       VALUES ($1, $2, $3, $4, $5)`,
+      [referrer.id, userId, depositId, levelConfig.level, rewardAmount]
     );
 
     // Aggiorna il bilancio del referrer

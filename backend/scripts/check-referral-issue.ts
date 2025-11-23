@@ -73,8 +73,8 @@ async function checkReferralIssue() {
              u_referrer.wallet_address as referrer_wallet,
              u_referred.wallet_address as referred_wallet
       FROM referral_earnings re
-      JOIN users u_referrer ON re.user_id = u_referrer.id
-      JOIN users u_referred ON re.from_user_id = u_referred.id
+      JOIN users u_referrer ON re.referrer_id = u_referrer.id
+      JOIN users u_referred ON re.referee_id = u_referred.id
       WHERE re.created_at > NOW() - INTERVAL '3 days'
       ORDER BY re.created_at DESC
     `);
@@ -85,7 +85,7 @@ async function checkReferralIssue() {
       console.log(`   Referrer: ${earning.referrer_wallet}`);
       console.log(`   Referred: ${earning.referred_wallet}`);
       console.log(`   Level: ${earning.level}`);
-      console.log(`   Amount: ${earning.amount} USDT (${earning.percentage}%)`);
+      console.log(`   Amount: ${earning.amount} USDT`);
       console.log(`   Deposit ID: ${earning.deposit_id}`);
       console.log(`   Created: ${earning.created_at}`);
       console.log('');

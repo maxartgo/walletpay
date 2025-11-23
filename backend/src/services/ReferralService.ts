@@ -24,11 +24,10 @@ export class ReferralService {
 
       // Create referral earning record
       await ReferralEarningModel.create(
-        referrer.id,
-        userId,
+        referrer.id,      // referrerId
+        userId,           // refereeId (the person who made the deposit)
         depositId,
         levelConfig.level,
-        levelConfig.percentage,
         rewardAmount
       );
 
