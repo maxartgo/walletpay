@@ -86,15 +86,20 @@ export class UserModel {
       5: 'level5_referrals',
     };
 
-    const result = await query(
-      `UPDATE users
+    const columnName = columnMap[level];
+    if (!columnName) {
+      throw new Error(`Invalid referral level: ${level}`);
+    }
+
+    // Costruisci la query in modo sicuro
+    const sql = `UPDATE users
        SET total_referral_earned = total_referral_earned + $1,
            referral_balance = referral_balance + $1,
-           ${columnMap[level]} = ${columnMap[level]} + 1
+           ${columnName} = ${columnName} + 1
        WHERE id = $2
-       RETURNING *`,
-      [amount, userId]
-    );
+       RETURNING *`;
+
+    const result = await query(sql, [amount, userId]);
 
     console.log(`🤝 Referral earning: Level ${level}, ${amount} USDT`);
     return result.rows[0];
