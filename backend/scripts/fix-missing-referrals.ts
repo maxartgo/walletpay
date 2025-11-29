@@ -5,9 +5,9 @@
 import { pool } from '../src/config/database.js';
 
 const REFERRAL_LEVELS = [
-  { level: 1, percentage: 10 },
-  { level: 2, percentage: 5 },
-  { level: 3, percentage: 3 },
+  { level: 1, percentage: 8 },
+  { level: 2, percentage: 4 },
+  { level: 3, percentage: 2 },
   { level: 4, percentage: 2 },
   { level: 5, percentage: 1 },
 ];
