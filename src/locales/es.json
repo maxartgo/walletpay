@@ -46,7 +46,7 @@
     },
     "referrals": {
       "title": "Referidos de 5 Niveles",
-      "description": "Gana comisiones en 5 niveles: 10%, 5%, 3%, 2%, 1%"
+      "description": "Gana comisiones en 5 niveles: 8%, 4%, 2%, 2%, 1%"
     }
   },
   "dashboard": {
@@ -66,7 +66,7 @@
     "yourReferralLink": "Tu Enlace de Referido",
     "copy": "Copiar",
     "linkCopied": "✅ ¡Enlace copiado al portapapeles!",
-    "shareLink": "Comparte este enlace para ganar comisiones: 10% (N1), 5% (N2), 3% (N3), 2% (N4), 1% (N5)",
+    "shareLink": "Comparte este enlace para ganar comisiones: 8% (N1), 4% (N2), 2% (N3), 2% (N4), 1% (N5)",
     "stakingSummary": "Resumen de Staking",
     "totalStaked": "Total en Staking",
     "currentValue": "Valor Actual",
@@ -123,24 +123,24 @@
     "fundsBreakdown": "Desglose de Fondos Personales",
     "unlockedStakings": "Stakings Desbloqueados",
     "grossAmount": "Monto Bruto",
-    "tax": "Impuesto (20%)",
+    "tax": "Impuesto (12%)",
     "youReceive": "Recibirás",
     "processing": "Procesando...",
     "noFunds": "No hay fondos disponibles",
     "noReferralBalance": "Sin saldo de referidos",
     "withdraw": "Retirar",
-    "warning": "El retiro incluye SOLO tus fondos personales (disponible + ganancias bloqueadas + stakings desbloqueados). El saldo de referidos se puede retirar por separado. Se aplica un impuesto del 20% al monto total. Todos los saldos personales se resetearán después del retiro.",
+    "warning": "El retiro incluye SOLO tus fondos personales (disponible + ganancias bloqueadas + stakings desbloqueados). El saldo de referidos se puede retirar por separado. Se aplica un impuesto del 12% al monto total. Todos los saldos personales se resetearán después del retiro.",
     "referralWarning": "El retiro de referidos retira SOLO el saldo de comisiones de referidos. Tus fondos personales (disponible, ganancias bloqueadas, stakings) permanecen intactos.",
     "loadingData": "Cargando datos de retiro...",
     "loadingReferralData": "Cargando datos de referidos...",
     "minimumNotice": "Límite Mínimo de Retiro:",
-    "minimumAmount": "50 USDT netos (después del 20% de impuesto)",
-    "minimumGross": "Monto bruto requerido: aproximadamente 62.5 USDT",
+    "minimumAmount": "50 USDT netos (después del 12% de impuesto)",
+    "minimumGross": "Monto bruto requerido: aproximadamente 56.82 USDT",
     "belowMinimum": "(< 50 mínimo)",
-    "confirmMessage": "⚠️ Confirmar Retiro\n\nMonto Bruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nMonto Neto: {net} USDT\n\nTodos tus saldos se resetearán.\n¿Quieres continuar?",
-    "confirmReferralMessage": "⚠️ Confirmar Retiro de Referidos\n\nMonto Bruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nMonto Neto: {net} USDT\n\nTu saldo de referidos se reseteará.\n¿Quieres continuar?",
-    "successMessage": "✅ ¡Solicitud de Retiro Creada!\n\nBruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\nNeto: {net} USDT\n\nLos fondos se enviarán a tu billetera.",
-    "referralSuccessMessage": "✅ ¡Retiro de Referidos Creado!\n\nBruto: {gross} USDT\nImpuesto (20%): -{tax} USDT\nNeto: {net} USDT\n\nLos fondos se enviarán a tu billetera."
+    "confirmMessage": "⚠️ Confirmar Retiro\n\nMonto Bruto: {gross} USDT\nImpuesto (12%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nMonto Neto: {net} USDT\n\nTodos tus saldos se resetearán.\n¿Quieres continuar?",
+    "confirmReferralMessage": "⚠️ Confirmar Retiro de Referidos\n\nMonto Bruto: {gross} USDT\nImpuesto (12%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nMonto Neto: {net} USDT\n\nTu saldo de referidos se reseteará.\n¿Quieres continuar?",
+    "successMessage": "✅ ¡Solicitud de Retiro Creada!\n\nBruto: {gross} USDT\nImpuesto (12%): -{tax} USDT\nNeto: {net} USDT\n\nLos fondos se enviarán a tu billetera.",
+    "referralSuccessMessage": "✅ ¡Retiro de Referidos Creado!\n\nBruto: {gross} USDT\nImpuesto (12%): -{tax} USDT\nNeto: {net} USDT\n\nLos fondos se enviarán a tu billetera."
   },
   "deposit": {
     "title": "Realizar un Depósito",

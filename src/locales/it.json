@@ -46,7 +46,7 @@
     },
     "referrals": {
       "title": "Referral a 5 Livelli",
-      "description": "Guadagna commissioni su 5 livelli: 10%, 5%, 3%, 2%, 1%"
+      "description": "Guadagna commissioni su 5 livelli: 8%, 4%, 2%, 2%, 1%"
     }
   },
   "dashboard": {
@@ -66,7 +66,7 @@
     "yourReferralLink": "Il Tuo Link Referral",
     "copy": "Copia",
     "linkCopied": "✅ Link copiato negli appunti!",
-    "shareLink": "Condividi questo link per guadagnare commissioni: 10% (L1), 5% (L2), 3% (L3), 2% (L4), 1% (L5)",
+    "shareLink": "Condividi questo link per guadagnare commissioni: 8% (L1), 4% (L2), 2% (L3), 2% (L4), 1% (L5)",
     "stakingSummary": "Riepilogo Staking",
     "totalStaked": "Totale in Staking",
     "currentValue": "Valore Attuale",
@@ -123,24 +123,24 @@
     "fundsBreakdown": "Composizione Fondi Personali",
     "unlockedStakings": "Staking Sbloccati",
     "grossAmount": "Importo Lordo",
-    "tax": "Tassa (20%)",
+    "tax": "Tassa (12%)",
     "youReceive": "Riceverai",
     "processing": "Elaborazione...",
     "noFunds": "Nessun fondo disponibile",
     "noReferralBalance": "Nessun saldo referral",
     "withdraw": "Preleva",
-    "warning": "Il prelievo include SOLO i tuoi fondi personali (disponibile + profitti bloccati + staking sbloccati). Il saldo referral può essere prelevato separatamente. Una tassa del 20% viene applicata sull'importo totale. Tutti i saldi personali verranno azzerati dopo il prelievo.",
+    "warning": "Il prelievo include SOLO i tuoi fondi personali (disponibile + profitti bloccati + staking sbloccati). Il saldo referral può essere prelevato separatamente. Una tassa del 12% viene applicata sull'importo totale. Tutti i saldi personali verranno azzerati dopo il prelievo.",
     "referralWarning": "Il prelievo referral preleva SOLO il saldo delle commissioni referral. I tuoi fondi personali (disponibile, profitti bloccati, staking) rimangono intatti.",
     "loadingData": "Caricamento dati prelievo...",
     "loadingReferralData": "Caricamento dati referral...",
     "minimumNotice": "Limite Minimo di Prelievo:",
-    "minimumAmount": "50 USDT netti (dopo tassa 20%)",
-    "minimumGross": "Importo lordo richiesto: circa 62.5 USDT",
+    "minimumAmount": "50 USDT netti (dopo tassa 12%)",
+    "minimumGross": "Importo lordo richiesto: circa 56.82 USDT",
     "belowMinimum": "(< 50 minimo)",
-    "confirmMessage": "⚠️ Conferma Prelievo\n\nImporto Lordo: {gross} USDT\nTassa (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nImporto Netto: {net} USDT\n\nTutti i tuoi saldi verranno azzerati.\nVuoi procedere?",
-    "confirmReferralMessage": "⚠️ Conferma Prelievo Referral\n\nImporto Lordo: {gross} USDT\nTassa (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nImporto Netto: {net} USDT\n\nIl tuo saldo referral verrà azzerato.\nVuoi procedere?",
-    "successMessage": "✅ Richiesta di Prelievo Creata!\n\nLordo: {gross} USDT\nTassa (20%): -{tax} USDT\nNetto: {net} USDT\n\nI fondi saranno inviati al tuo wallet.",
-    "referralSuccessMessage": "✅ Prelievo Referral Creato!\n\nLordo: {gross} USDT\nTassa (20%): -{tax} USDT\nNetto: {net} USDT\n\nI fondi saranno inviati al tuo wallet."
+    "confirmMessage": "⚠️ Conferma Prelievo\n\nImporto Lordo: {gross} USDT\nTassa (12%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nImporto Netto: {net} USDT\n\nTutti i tuoi saldi verranno azzerati.\nVuoi procedere?",
+    "confirmReferralMessage": "⚠️ Conferma Prelievo Referral\n\nImporto Lordo: {gross} USDT\nTassa (12%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nImporto Netto: {net} USDT\n\nIl tuo saldo referral verrà azzerato.\nVuoi procedere?",
+    "successMessage": "✅ Richiesta di Prelievo Creata!\n\nLordo: {gross} USDT\nTassa (12%): -{tax} USDT\nNetto: {net} USDT\n\nI fondi saranno inviati al tuo wallet.",
+    "referralSuccessMessage": "✅ Prelievo Referral Creato!\n\nLordo: {gross} USDT\nTassa (12%): -{tax} USDT\nNetto: {net} USDT\n\nI fondi saranno inviati al tuo wallet."
   },
   "deposit": {
     "title": "Effettua un Deposito",

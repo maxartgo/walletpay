@@ -46,7 +46,7 @@
     },
     "referrals": {
       "title": "5-Level Referrals",
-      "description": "Earn commissions on 5 levels: 10%, 5%, 3%, 2%, 1%"
+      "description": "Earn commissions on 5 levels: 8%, 4%, 2%, 2%, 1%"
     }
   },
   "dashboard": {
@@ -66,7 +66,7 @@
     "yourReferralLink": "Your Referral Link",
     "copy": "Copy",
     "linkCopied": "✅ Link copied to clipboard!",
-    "shareLink": "Share this link to earn commissions: 10% (L1), 5% (L2), 3% (L3), 2% (L4), 1% (L5)",
+    "shareLink": "Share this link to earn commissions: 8% (L1), 4% (L2), 2% (L3), 2% (L4), 1% (L5)",
     "stakingSummary": "Staking Summary",
     "totalStaked": "Total Staked",
     "currentValue": "Current Value",
@@ -123,24 +123,24 @@
     "fundsBreakdown": "Personal Funds Breakdown",
     "unlockedStakings": "Unlocked Stakings",
     "grossAmount": "Gross Amount",
-    "tax": "Tax (20%)",
+    "tax": "Tax (12%)",
     "youReceive": "You Will Receive",
     "processing": "Processing...",
     "noFunds": "No funds available",
     "noReferralBalance": "No referral balance",
     "withdraw": "Withdraw",
-    "warning": "Withdrawal includes ONLY your personal funds (available + locked profits + unlocked stakings). Referral balance can be withdrawn separately. A 20% tax is applied to the total amount. All personal balances will be reset after withdrawal.",
+    "warning": "Withdrawal includes ONLY your personal funds (available + locked profits + unlocked stakings). Referral balance can be withdrawn separately. A 12% tax is applied to the total amount. All personal balances will be reset after withdrawal.",
     "referralWarning": "Referral withdrawal withdraws ONLY the referral commission balance. Your personal funds (available, locked profits, stakings) remain intact.",
     "loadingData": "Loading withdrawal data...",
     "loadingReferralData": "Loading referral data...",
     "minimumNotice": "Minimum Withdrawal Limit:",
-    "minimumAmount": "50 USDT net (after 20% tax)",
-    "minimumGross": "Gross amount required: approximately 62.5 USDT",
+    "minimumAmount": "50 USDT net (after 12% tax)",
+    "minimumGross": "Gross amount required: approximately 56.82 USDT",
     "belowMinimum": "(< 50 minimum)",
-    "confirmMessage": "⚠️ Confirm Withdrawal\n\nGross Amount: {gross} USDT\nTax (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nNet Amount: {net} USDT\n\nAll your balances will be reset.\nDo you want to proceed?",
-    "confirmReferralMessage": "⚠️ Confirm Referral Withdrawal\n\nGross Amount: {gross} USDT\nTax (20%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nNet Amount: {net} USDT\n\nYour referral balance will be reset.\nDo you want to proceed?",
-    "successMessage": "✅ Withdrawal Request Created!\n\nGross: {gross} USDT\nTax (20%): -{tax} USDT\nNet: {net} USDT\n\nFunds will be sent to your wallet.",
-    "referralSuccessMessage": "✅ Referral Withdrawal Created!\n\nGross: {gross} USDT\nTax (20%): -{tax} USDT\nNet: {net} USDT\n\nFunds will be sent to your wallet."
+    "confirmMessage": "⚠️ Confirm Withdrawal\n\nGross Amount: {gross} USDT\nTax (12%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nNet Amount: {net} USDT\n\nAll your balances will be reset.\nDo you want to proceed?",
+    "confirmReferralMessage": "⚠️ Confirm Referral Withdrawal\n\nGross Amount: {gross} USDT\nTax (12%): -{tax} USDT\n━━━━━━━━━━━━━━━━━━\nNet Amount: {net} USDT\n\nYour referral balance will be reset.\nDo you want to proceed?",
+    "successMessage": "✅ Withdrawal Request Created!\n\nGross: {gross} USDT\nTax (12%): -{tax} USDT\nNet: {net} USDT\n\nFunds will be sent to your wallet.",
+    "referralSuccessMessage": "✅ Referral Withdrawal Created!\n\nGross: {gross} USDT\nTax (12%): -{tax} USDT\nNet: {net} USDT\n\nFunds will be sent to your wallet."
   },
   "deposit": {
     "title": "Make a Deposit",
