@@ -23,8 +23,8 @@ export class WithdrawalService {
         Number(user.locked_profits) +
         Number(unlockedValue);
 
-      // Calculate 20% tax
-      const taxPercentage = 20;
+      // Calculate 12% tax
+      const taxPercentage = 12;
       const taxAmount = grossAmount * (taxPercentage / 100);
       const netAmount = grossAmount - taxAmount;
 
@@ -60,8 +60,8 @@ export class WithdrawalService {
       // Referral funds only
       const grossAmount = Number(user.referral_balance);
 
-      // Calculate 20% tax
-      const taxPercentage = 20;
+      // Calculate 12% tax
+      const taxPercentage = 12;
       const taxAmount = grossAmount * (taxPercentage / 100);
       const netAmount = grossAmount - taxAmount;
 
@@ -134,7 +134,7 @@ export class WithdrawalService {
 
       console.log(`💸 Withdrawal created for ${walletAddress}`);
       console.log(`   Gross: ${grossAmount.toFixed(2)} USDT`);
-      console.log(`   Tax (20%): ${taxAmount.toFixed(2)} USDT`);
+      console.log(`   Tax (12%): ${taxAmount.toFixed(2)} USDT`);
       console.log(`   Net: ${netAmount.toFixed(2)} USDT`);
 
       return {
@@ -200,7 +200,7 @@ export class WithdrawalService {
 
       console.log(`💰 Referral Withdrawal created for ${walletAddress}`);
       console.log(`   Gross: ${grossAmount.toFixed(2)} USDT`);
-      console.log(`   Tax (20%): ${taxAmount.toFixed(2)} USDT`);
+      console.log(`   Tax (12%): ${taxAmount.toFixed(2)} USDT`);
       console.log(`   Net: ${netAmount.toFixed(2)} USDT`);
 
       return {
