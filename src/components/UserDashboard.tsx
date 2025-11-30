@@ -43,7 +43,7 @@ export const UserDashboard = () => {
         setInvestments(investmentData.investments || []);
         setStats({
           ...investmentData.stats,
-          stakingEligibility: investmentData.summary?.stakingEligibility,
+          stakingEligibility: investmentData.stakingEligibility,
         });
       }
 
