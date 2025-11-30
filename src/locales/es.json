@@ -46,7 +46,7 @@
     },
     "referrals": {
       "title": "Referidos de 5 Niveles",
-      "description": "Gana comisiones en 5 niveles: 10%, 5%, 3%, 1%, 1%"
+      "description": "Gana comisiones en 5 niveles: 10%, 5%, 1%, 1%, 1%"
     }
   },
   "dashboard": {
@@ -66,7 +66,7 @@
     "yourReferralLink": "Tu Enlace de Referido",
     "copy": "Copiar",
     "linkCopied": "✅ ¡Enlace copiado al portapapeles!",
-    "shareLink": "Comparte este enlace para ganar comisiones: 10% (N1), 5% (N2), 3% (N3), 1% (N4), 1% (N5)",
+    "shareLink": "Comparte este enlace para ganar comisiones: 10% (N1), 5% (N2), 1% (N3), 1% (N4), 1% (N5)",
     "stakingSummary": "Resumen de Staking",
     "totalStaked": "Total en Staking",
     "currentValue": "Valor Actual",
