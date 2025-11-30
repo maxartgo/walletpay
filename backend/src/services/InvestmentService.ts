@@ -1,7 +1,102 @@
 import { UserModel } from '../models/User.js';
 import { InvestmentModel } from '../models/Investment.js';
+import { query } from '../config/database.js';
 
 export class InvestmentService {
+  /**
+   * Create STARTER investment (50 USDT, one-time)
+   */
+  static async createStarterInvestment(walletAddress: string): Promise<any> {
+    try {
+      const user = await UserModel.findByWallet(walletAddress);
+      if (!user) {
+        return {
+          success: false,
+          message: 'User not found',
+        };
+      }
+
+      // Check if already used starter
+      if (user.has_used_starter) {
+        return {
+          success: false,
+          message: 'Starter investment can only be used once',
+        };
+      }
+
+      const totalAvailable = user.available_balance + user.referral_balance;
+      if (totalAvailable < 50) {
+        return {
+          success: false,
+          message: `Insufficient balance. You have ${totalAvailable.toFixed(2)} USDT but need 50 USDT for starter`,
+        };
+      }
+
+      // Deduct 50 USDT and mark starter as used
+      const updatedUser = await UserModel.createStarterInvestment(user.id);
+
+      // Create starter investment
+      const investment = await InvestmentModel.createStarter(user.id);
+
+      console.log(`🌱 Starter investment created for ${walletAddress}`);
+
+      return {
+        success: true,
+        message: 'Starter investment created successfully',
+        investment,
+        user: updatedUser,
+      };
+    } catch (error) {
+      console.error('Error creating starter investment:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Create PREMIUM investment (100 USDT, tiered)
+   */
+  static async createPremiumInvestment(walletAddress: string): Promise<any> {
+    try {
+      const user = await UserModel.findByWallet(walletAddress);
+      if (!user) {
+        return {
+          success: false,
+          message: 'User not found',
+        };
+      }
+
+      const totalAvailable = user.available_balance + user.referral_balance;
+      if (totalAvailable < 100) {
+        return {
+          success: false,
+          message: `Insufficient balance. You have ${totalAvailable.toFixed(2)} USDT but need 100 USDT for premium`,
+        };
+      }
+
+      // Create investment at the appropriate tier
+      const premiumCount = user.premium_count;
+      const dailyPercentage = InvestmentModel.getPremiumDailyPercentage(premiumCount);
+
+      // Deduct 100 USDT and increment premium_count
+      const updatedUser = await UserModel.createPremiumInvestment(user.id);
+
+      // Create premium investment with correct tier
+      const investment = await InvestmentModel.createPremium(user.id, premiumCount);
+
+      console.log(`💎 Premium #${premiumCount + 1} created for ${walletAddress} at ${dailyPercentage}%`);
+
+      return {
+        success: true,
+        message: `Premium investment #${premiumCount + 1} created successfully at ${dailyPercentage}% daily`,
+        investment,
+        user: updatedUser,
+      };
+    } catch (error) {
+      console.error('Error creating premium investment:', error);
+      throw error;
+    }
+  }
+
   /**
    * Create new investment (100 USDT)
    * Requires user to have at least 100 USDT in available + referral balance
@@ -100,12 +195,21 @@ export class InvestmentService {
       // Add locked profit to user
       await UserModel.addLockedProfits(user.id, lockedProfit);
 
-      // Create new investment (100 USDT)
-      const newInvestment = await InvestmentModel.create(user.id);
+      // Get current premium_count to determine tier
+      const currentPremiumCount = user.premium_count;
+
+      // Increment premium_count (no balance deduction for reinvest)
+      await query(
+        `UPDATE users SET premium_count = premium_count + 1 WHERE id = $1`,
+        [user.id]
+      );
+
+      // Create new premium investment with correct tier
+      const newInvestment = await InvestmentModel.createPremium(user.id, currentPremiumCount);
 
       console.log(`🔁 Reinvestment: ${walletAddress}`);
       console.log(`   Locked: ${lockedProfit.toFixed(2)} USDT`);
-      console.log(`   New Investment: 100 USDT`);
+      console.log(`   New Premium Investment: 100 USDT at tier ${currentPremiumCount + 1}`);
 
       return {
         success: true,
@@ -131,15 +235,21 @@ export class InvestmentService {
 
       const investments = await InvestmentModel.getUserInvestments(user.id);
       const stats = await InvestmentModel.getUserStats(user.id);
+      const totalAvailable = Number(user.available_balance) + Number(user.referral_balance);
 
       return {
         user,
         investments,
         stats,
         summary: {
-          totalAvailable: Number(user.available_balance) + Number(user.referral_balance),
-          canInvest: (Number(user.available_balance) + Number(user.referral_balance)) >= 100,
+          totalAvailable,
+          canInvest: totalAvailable >= 100,
           lockedProfits: Number(user.locked_profits),
+        },
+        stakingEligibility: {
+          hasUsedStarter: user.has_used_starter,
+          premiumCount: user.premium_count,
+          nextPremiumPercentage: UserModel.getNextPremiumPercentage(user.premium_count),
         },
       };
     } catch (error) {

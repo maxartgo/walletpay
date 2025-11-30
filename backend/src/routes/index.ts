@@ -24,6 +24,8 @@ router.post('/deposits', DepositController.createDeposit);
 router.get('/deposits/:wallet', DepositController.getUserDeposits);
 
 // Investment routes
+router.post('/investments/starter', InvestmentController.createStarterInvestment);
+router.post('/investments/premium', InvestmentController.createPremiumInvestment);
 router.post('/investments', InvestmentController.createInvestment);
 router.post('/investments/reinvest', InvestmentController.reinvest);
 router.get('/investments/:wallet', InvestmentController.getUserInvestments);

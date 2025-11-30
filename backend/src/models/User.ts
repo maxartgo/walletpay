@@ -1,4 +1,5 @@
 import { query } from '../config/database.js';
+import { InvestmentModel } from './Investment.js';
 
 export interface User {
   id: number;
@@ -15,6 +16,8 @@ export interface User {
   level3_referrals: number;
   level4_referrals: number;
   level5_referrals: number;
+  has_used_starter: boolean;
+  premium_count: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -283,5 +286,98 @@ export class UserModel {
   static async getTotalUsers(): Promise<number> {
     const result = await query('SELECT COUNT(*) as count FROM users');
     return parseInt(result.rows[0].count);
+  }
+
+  /**
+   * Create STARTER investment (50 USDT, one-time)
+   */
+  static async createStarterInvestment(userId: number): Promise<User> {
+    const user = await this.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    if (user.has_used_starter) {
+      throw new Error('Starter investment already used');
+    }
+
+    const totalAvailable = user.available_balance + user.referral_balance;
+    if (totalAvailable < 50) {
+      throw new Error('Insufficient balance for starter investment (minimum 50 USDT)');
+    }
+
+    // Deduct 50 USDT from balances (referral first, then available)
+    let remaining = 50;
+    let newReferralBalance = user.referral_balance;
+    let newAvailableBalance = user.available_balance;
+
+    if (newReferralBalance >= remaining) {
+      newReferralBalance -= remaining;
+    } else {
+      remaining -= newReferralBalance;
+      newReferralBalance = 0;
+      newAvailableBalance -= remaining;
+    }
+
+    const result = await query(
+      `UPDATE users
+       SET available_balance = $1,
+           referral_balance = $2,
+           has_used_starter = TRUE
+       WHERE id = $3
+       RETURNING *`,
+      [newAvailableBalance, newReferralBalance, userId]
+    );
+
+    console.log(`🌱 Starter investment created: -50 USDT from balances`);
+    return result.rows[0];
+  }
+
+  /**
+   * Create PREMIUM investment (100 USDT, tiered)
+   */
+  static async createPremiumInvestment(userId: number): Promise<User> {
+    const user = await this.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const totalAvailable = user.available_balance + user.referral_balance;
+    if (totalAvailable < 100) {
+      throw new Error('Insufficient balance for premium investment (minimum 100 USDT)');
+    }
+
+    // Deduct 100 USDT from balances (referral first, then available)
+    let remaining = 100;
+    let newReferralBalance = user.referral_balance;
+    let newAvailableBalance = user.available_balance;
+
+    if (newReferralBalance >= remaining) {
+      newReferralBalance -= remaining;
+    } else {
+      remaining -= newReferralBalance;
+      newReferralBalance = 0;
+      newAvailableBalance -= remaining;
+    }
+
+    const result = await query(
+      `UPDATE users
+       SET available_balance = $1,
+           referral_balance = $2,
+           premium_count = premium_count + 1
+       WHERE id = $3
+       RETURNING *`,
+      [newAvailableBalance, newReferralBalance, userId]
+    );
+
+    console.log(`💎 Premium investment created: -100 USDT from balances, premium_count now ${user.premium_count + 1}`);
+    return result.rows[0];
+  }
+
+  /**
+   * Get next premium percentage for user
+   */
+  static getNextPremiumPercentage(premiumCount: number): number {
+    return InvestmentModel.getPremiumDailyPercentage(premiumCount);
   }
 }

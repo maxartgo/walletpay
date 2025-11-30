@@ -1,4 +1,5 @@
 import { query } from '../config/database.js';
+import { STAKING_TIERS } from '../types/index.js';
 
 export interface Investment {
   id: number;
@@ -8,6 +9,7 @@ export interface Investment {
   yield_earned: number;
   daily_percentage: number;
   yield_goal: number;
+  staking_type: 'starter' | 'premium';
   status: 'active' | 'unlocked' | 'withdrawn';
   created_at: Date;
   unlocked_at?: Date;
@@ -17,15 +19,64 @@ export interface Investment {
 
 export class InvestmentModel {
   /**
-   * Create new investment (always 100 USDT)
+   * Get premium daily percentage based on premium count
+   */
+  static getPremiumDailyPercentage(premiumCount: number): number {
+    if (premiumCount === 0) return STAKING_TIERS[1].dailyPercentage; // 0.7758%
+    if (premiumCount === 1) return STAKING_TIERS[2].dailyPercentage; // 0.65%
+    return STAKING_TIERS[3].dailyPercentage; // 0.55%
+  }
+
+  /**
+   * Create starter investment (50 USDT, one-time)
+   */
+  static async createStarter(userId: number): Promise<Investment> {
+    const starter = STAKING_TIERS[0];
+    const result = await query(
+      `INSERT INTO investments (
+        user_id, amount, current_value, yield_earned,
+        daily_percentage, yield_goal, staking_type, status, last_yield_calculated_at
+      )
+      VALUES ($1, $2, $3, 0, $4, $5, 'starter', 'active', CURRENT_TIMESTAMP)
+      RETURNING *`,
+      [userId, starter.amount, starter.amount, starter.dailyPercentage, starter.yieldGoal]
+    );
+
+    console.log(`🌱 Starter investment created for user ${userId}: ${starter.amount} USDT at ${starter.dailyPercentage}%`);
+    return result.rows[0];
+  }
+
+  /**
+   * Create premium investment (100 USDT, tiered)
+   */
+  static async createPremium(userId: number, premiumCount: number): Promise<Investment> {
+    const dailyPercentage = this.getPremiumDailyPercentage(premiumCount);
+    const premium = STAKING_TIERS.find(t => t.type === 'premium' && t.dailyPercentage === dailyPercentage)!;
+
+    const result = await query(
+      `INSERT INTO investments (
+        user_id, amount, current_value, yield_earned,
+        daily_percentage, yield_goal, staking_type, status, last_yield_calculated_at
+      )
+      VALUES ($1, $2, $3, 0, $4, $5, 'premium', 'active', CURRENT_TIMESTAMP)
+      RETURNING *`,
+      [userId, premium.amount, premium.amount, premium.dailyPercentage, premium.yieldGoal]
+    );
+
+    console.log(`💎 Premium investment #${premiumCount + 1} created for user ${userId}: ${premium.amount} USDT at ${premium.dailyPercentage}%`);
+    return result.rows[0];
+  }
+
+  /**
+   * Create new investment (always 100 USDT) - DEPRECATED, use createPremium
    */
   static async create(userId: number): Promise<Investment> {
     const result = await query(
       `INSERT INTO investments (
         user_id, amount, current_value, yield_earned,
-        daily_percentage, yield_goal, status, last_yield_calculated_at
+        daily_percentage, yield_goal, staking_type, status, last_yield_calculated_at
       )
-      VALUES ($1, 100, 100, 0, 0.7758, 100, 'active', CURRENT_TIMESTAMP)
+      VALUES ($1, 100, 100, 0, 0.7758, 100, 'premium', 'active', CURRENT_TIMESTAMP)
       RETURNING *`,
       [userId]
     );

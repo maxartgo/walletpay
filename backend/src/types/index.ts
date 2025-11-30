@@ -13,6 +13,8 @@ export interface User {
   level3_referrals: number;
   level4_referrals: number;
   level5_referrals: number;
+  has_used_starter: boolean;
+  premium_count: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -48,6 +50,7 @@ export interface Investment {
   yield_earned: number;
   daily_percentage: number;
   yield_goal: number;
+  staking_type: 'starter' | 'premium';
   status: 'active' | 'unlocked' | 'withdrawn';
   created_at: Date;
   unlocked_at?: Date;
@@ -97,4 +100,54 @@ export const REFERRAL_LEVELS: ReferralLevel[] = [
   { level: 3, percentage: 2 },
   { level: 4, percentage: 2 },
   { level: 5, percentage: 1 },
+];
+
+export interface StakingTier {
+  type: 'starter' | 'premium';
+  amount: number;
+  dailyPercentage: number;
+  yieldGoal: number;
+  unlockValue: number;
+  estimatedDays: number;
+  oneTimeOnly?: boolean;
+  premiumLevel?: number;
+}
+
+export const STAKING_TIERS: StakingTier[] = [
+  {
+    type: 'starter',
+    amount: 50,
+    dailyPercentage: 0.45,
+    yieldGoal: 50,
+    unlockValue: 100,
+    estimatedDays: 154,
+    oneTimeOnly: true,
+  },
+  {
+    type: 'premium',
+    amount: 100,
+    dailyPercentage: 0.7758,
+    yieldGoal: 100,
+    unlockValue: 200,
+    estimatedDays: 90,
+    premiumLevel: 1,
+  },
+  {
+    type: 'premium',
+    amount: 100,
+    dailyPercentage: 0.65,
+    yieldGoal: 100,
+    unlockValue: 200,
+    estimatedDays: 108,
+    premiumLevel: 2,
+  },
+  {
+    type: 'premium',
+    amount: 100,
+    dailyPercentage: 0.55,
+    yieldGoal: 100,
+    unlockValue: 200,
+    estimatedDays: 127,
+    premiumLevel: 3,
+  },
 ];

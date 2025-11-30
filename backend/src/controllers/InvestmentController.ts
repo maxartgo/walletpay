@@ -2,7 +2,51 @@ import { Request, Response } from 'express';
 import { InvestmentService } from '../services/InvestmentService.js';
 
 export class InvestmentController {
-  // Create new investment
+  // Create STARTER investment (50 USDT, one-time)
+  static async createStarterInvestment(req: Request, res: Response) {
+    try {
+      const { walletAddress } = req.body;
+
+      if (!walletAddress || !/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
+        return res.status(400).json({ error: 'Invalid wallet address' });
+      }
+
+      const result = await InvestmentService.createStarterInvestment(walletAddress);
+
+      if (!result.success) {
+        return res.status(400).json({ error: result.message });
+      }
+
+      res.json(result);
+    } catch (error) {
+      console.error('Error creating starter investment:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  // Create PREMIUM investment (100 USDT, tiered)
+  static async createPremiumInvestment(req: Request, res: Response) {
+    try {
+      const { walletAddress } = req.body;
+
+      if (!walletAddress || !/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
+        return res.status(400).json({ error: 'Invalid wallet address' });
+      }
+
+      const result = await InvestmentService.createPremiumInvestment(walletAddress);
+
+      if (!result.success) {
+        return res.status(400).json({ error: result.message });
+      }
+
+      res.json(result);
+    } catch (error) {
+      console.error('Error creating premium investment:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  // Create new investment (DEPRECATED - use createPremiumInvestment)
   static async createInvestment(req: Request, res: Response) {
     try {
       const { walletAddress } = req.body;

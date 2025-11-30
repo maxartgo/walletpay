@@ -111,6 +111,15 @@
     "reinvesting": "Reinvesting...",
     "reinvestNote": "By reinvesting, {amount} USDT will be locked as profits",
     "unlockedMessage": "Staking unlocked! You can withdraw or reinvest",
+    "starter": {
+      "title": "Starter Package",
+      "oneTime": "ONE TIME",
+      "button": "Stake 50 USDT Starter"
+    },
+    "premium": {
+      "title": "Premium Package",
+      "button": "Stake 100 USDT Premium"
+    },
     "status": {
       "active": "Active",
       "unlocked": "Unlocked",
