@@ -100,6 +100,7 @@
     "days": "giorni",
     "creating": "Creazione in corso...",
     "insufficientBalance": "Saldo insufficiente (min 100 USDT)",
+    "insufficientBalanceStarter": "Saldo insufficiente (min 50 USDT)",
     "stake100": "Metti in Staking 100 USDT",
     "missing": "Ti mancano {amount} USDT per mettere in staking",
     "stakingNumber": "Staking #{id}",

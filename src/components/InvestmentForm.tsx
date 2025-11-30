@@ -139,7 +139,7 @@ export function InvestmentForm({ user, onInvestmentCreated, stakingEligibility }
               {isCreatingStarter ? (
                 `⏳ ${t('staking.creating')}`
               ) : !canCreateStarter ? (
-                `❌ ${t('staking.insufficientBalance')}`
+                `❌ ${t('staking.insufficientBalanceStarter')}`
               ) : (
                 `🌱 ${t('staking.starter.button')}`
               )}
