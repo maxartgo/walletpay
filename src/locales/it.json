@@ -46,7 +46,7 @@
     },
     "referrals": {
       "title": "Referral a 5 Livelli",
-      "description": "Guadagna commissioni su 5 livelli: 8%, 4%, 2%, 2%, 1%"
+      "description": "Guadagna commissioni su 5 livelli: 10%, 5%, 3%, 1%, 1%"
     }
   },
   "dashboard": {
@@ -66,7 +66,7 @@
     "yourReferralLink": "Il Tuo Link Referral",
     "copy": "Copia",
     "linkCopied": "✅ Link copiato negli appunti!",
-    "shareLink": "Condividi questo link per guadagnare commissioni: 8% (L1), 4% (L2), 2% (L3), 2% (L4), 1% (L5)",
+    "shareLink": "Condividi questo link per guadagnare commissioni: 10% (L1), 5% (L2), 3% (L3), 1% (L4), 1% (L5)",
     "stakingSummary": "Riepilogo Staking",
     "totalStaked": "Totale in Staking",
     "currentValue": "Valore Attuale",
