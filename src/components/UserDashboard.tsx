@@ -41,7 +41,10 @@ export const UserDashboard = () => {
       console.log('Investment data:', investmentData);
       if (investmentData) {
         setInvestments(investmentData.investments || []);
-        setStats(investmentData.stats || null);
+        setStats({
+          ...investmentData.stats,
+          stakingEligibility: investmentData.summary?.stakingEligibility,
+        });
       }
 
       // Refresh USDT balance from wallet
@@ -283,7 +286,11 @@ export const UserDashboard = () => {
       )}
 
       {/* Staking Form */}
-      <InvestmentForm user={userWithNumbers} onInvestmentCreated={loadUserData} />
+      <InvestmentForm
+        user={userWithNumbers}
+        onInvestmentCreated={loadUserData}
+        stakingEligibility={stats?.stakingEligibility}
+      />
 
       {/* Active Staking */}
       {activeInvestments.length > 0 && (

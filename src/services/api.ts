@@ -71,6 +71,16 @@ export const apiService = {
   },
 
   // Investment endpoints
+  async createStarterInvestment(walletAddress: string) {
+    const response = await api.post('/investments/starter', { walletAddress });
+    return response.data;
+  },
+
+  async createPremiumInvestment(walletAddress: string) {
+    const response = await api.post('/investments/premium', { walletAddress });
+    return response.data;
+  },
+
   async createInvestment(walletAddress: string) {
     const response = await api.post('/investments', { walletAddress });
     return response.data;
