@@ -15,6 +15,7 @@ export const UserDashboard = () => {
   const [investments, setInvestments] = useState<Investment[]>([]);
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [activeReferralCounts, setActiveReferralCounts] = useState<any>(null);
 
   useEffect(() => {
     if (address && isConnected) {
@@ -45,6 +46,7 @@ export const UserDashboard = () => {
           ...investmentData.stats,
           stakingEligibility: investmentData.stakingEligibility,
         });
+        setActiveReferralCounts(investmentData.activeReferralCounts || null);
       }
 
       // Refresh USDT balance from wallet
@@ -212,22 +214,57 @@ export const UserDashboard = () => {
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 1</p>
               <p className="text-white font-bold">{userWithNumbers.direct_referrals}</p>
+              {activeReferralCounts && (
+                <p className="text-xs mt-1">
+                  <span className="text-green-400">✓ {activeReferralCounts.level1Active}</span>
+                  <span className="text-gray-500 mx-1">/</span>
+                  <span className="text-red-400">✗ {userWithNumbers.direct_referrals - activeReferralCounts.level1Active}</span>
+                </p>
+              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 2</p>
               <p className="text-white font-bold">{userWithNumbers.level2_referrals}</p>
+              {activeReferralCounts && (
+                <p className="text-xs mt-1">
+                  <span className="text-green-400">✓ {activeReferralCounts.level2Active}</span>
+                  <span className="text-gray-500 mx-1">/</span>
+                  <span className="text-red-400">✗ {userWithNumbers.level2_referrals - activeReferralCounts.level2Active}</span>
+                </p>
+              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 3</p>
               <p className="text-white font-bold">{userWithNumbers.level3_referrals}</p>
+              {activeReferralCounts && (
+                <p className="text-xs mt-1">
+                  <span className="text-green-400">✓ {activeReferralCounts.level3Active}</span>
+                  <span className="text-gray-500 mx-1">/</span>
+                  <span className="text-red-400">✗ {userWithNumbers.level3_referrals - activeReferralCounts.level3Active}</span>
+                </p>
+              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 4</p>
               <p className="text-white font-bold">{userWithNumbers.level4_referrals}</p>
+              {activeReferralCounts && (
+                <p className="text-xs mt-1">
+                  <span className="text-green-400">✓ {activeReferralCounts.level4Active}</span>
+                  <span className="text-gray-500 mx-1">/</span>
+                  <span className="text-red-400">✗ {userWithNumbers.level4_referrals - activeReferralCounts.level4Active}</span>
+                </p>
+              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 5</p>
               <p className="text-white font-bold">{userWithNumbers.level5_referrals}</p>
+              {activeReferralCounts && (
+                <p className="text-xs mt-1">
+                  <span className="text-green-400">✓ {activeReferralCounts.level5Active}</span>
+                  <span className="text-gray-500 mx-1">/</span>
+                  <span className="text-red-400">✗ {userWithNumbers.level5_referrals - activeReferralCounts.level5Active}</span>
+                </p>
+              )}
             </div>
           </div>
         </div>

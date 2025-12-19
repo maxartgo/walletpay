@@ -92,6 +92,15 @@ export class WithdrawalService {
         };
       }
 
+      // Check referral requirements for withdrawal
+      const withdrawalEligibility = await UserModel.canWithdraw(user.id);
+      if (!withdrawalEligibility.canWithdraw) {
+        return {
+          success: false,
+          message: `To withdraw, you need at least 2 direct referrals (L1) and 4 level-2 referrals (L2) with active Premium staking. You currently have ${withdrawalEligibility.level1Count}/2 (L1) and ${withdrawalEligibility.level2Count}/4 (L2).`,
+        };
+      }
+
       // Calculate withdrawable amount
       const withdrawableData = await this.getWithdrawableAmount(walletAddress);
       if (!withdrawableData || withdrawableData.grossAmount <= 0) {
@@ -161,6 +170,15 @@ export class WithdrawalService {
         return {
           success: false,
           message: 'User not found',
+        };
+      }
+
+      // Check referral requirements for withdrawal
+      const withdrawalEligibility = await UserModel.canWithdraw(user.id);
+      if (!withdrawalEligibility.canWithdraw) {
+        return {
+          success: false,
+          message: `To withdraw, you need at least 2 direct referrals (L1) and 4 level-2 referrals (L2) with active Premium staking. You currently have ${withdrawalEligibility.level1Count}/2 (L1) and ${withdrawalEligibility.level2Count}/4 (L2).`,
         };
       }
 

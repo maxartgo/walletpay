@@ -178,6 +178,15 @@ export class InvestmentService {
         };
       }
 
+      // Check referral requirements for reinvest
+      const reinvestEligibility = await UserModel.canReinvest(user.id);
+      if (!reinvestEligibility.canReinvest) {
+        return {
+          success: false,
+          message: `To reinvest, you need at least 2 direct referrals (L1) with active Premium staking. You currently have ${reinvestEligibility.level1Count}/2.`,
+        };
+      }
+
       // Calculate locked profits
       const lockedProfit = investment.current_value - 100;
 
@@ -228,6 +237,7 @@ export class InvestmentService {
       const investments = await InvestmentModel.getUserInvestments(user.id);
       const stats = await InvestmentModel.getUserStats(user.id);
       const totalAvailable = Number(user.available_balance) + Number(user.referral_balance);
+      const activeReferralCounts = await UserModel.getActiveReferralCounts(user.id);
 
       return {
         user,
@@ -243,6 +253,7 @@ export class InvestmentService {
           premiumCount: user.premium_count,
           nextPremiumPercentage: UserModel.getNextPremiumPercentage(user.premium_count),
         },
+        activeReferralCounts,
       };
     } catch (error) {
       console.error('Error getting user investments:', error);

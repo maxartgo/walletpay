@@ -375,4 +375,93 @@ export class UserModel {
   static getNextPremiumPercentage(premiumCount: number): number {
     return InvestmentModel.getPremiumDailyPercentage(premiumCount);
   }
+
+  /**
+   * Count active referrals with Premium staking at a specific level
+   */
+  static async countActiveReferralsWithPremium(userId: number, level: number): Promise<number> {
+    const result = await query(
+      `SELECT COUNT(DISTINCT u.id) as count
+       FROM users u
+       INNER JOIN investments i ON i.user_id = u.id
+       WHERE u.id IN (
+         WITH RECURSIVE referral_tree AS (
+           SELECT id, wallet_address, referrer_address, 1 as depth
+           FROM users
+           WHERE referrer_address = (SELECT wallet_address FROM users WHERE id = $1)
+
+           UNION ALL
+
+           SELECT u.id, u.wallet_address, u.referrer_address, rt.depth + 1
+           FROM users u
+           INNER JOIN referral_tree rt ON u.referrer_address = rt.wallet_address
+           WHERE rt.depth < $2
+         )
+         SELECT id FROM referral_tree WHERE depth = $2
+       )
+       AND i.staking_type = 'premium'
+       AND i.status = 'active'`,
+      [userId, level]
+    );
+
+    return parseInt(result.rows[0].count);
+  }
+
+  /**
+   * Check if user meets requirements for reinvest
+   * Requires: 2 L1 referrals with active Premium
+   */
+  static async canReinvest(userId: number): Promise<{ canReinvest: boolean; level1Count: number }> {
+    const level1Count = await this.countActiveReferralsWithPremium(userId, 1);
+
+    return {
+      canReinvest: level1Count >= 2,
+      level1Count,
+    };
+  }
+
+  /**
+   * Check if user meets requirements for withdrawal
+   * Requires: 2 L1 + 4 L2 referrals with active Premium
+   */
+  static async canWithdraw(userId: number): Promise<{
+    canWithdraw: boolean;
+    level1Count: number;
+    level2Count: number;
+  }> {
+    const level1Count = await this.countActiveReferralsWithPremium(userId, 1);
+    const level2Count = await this.countActiveReferralsWithPremium(userId, 2);
+
+    return {
+      canWithdraw: level1Count >= 2 && level2Count >= 4,
+      level1Count,
+      level2Count,
+    };
+  }
+  /**
+   * Get active Premium counts for all referral levels (1-5)
+   */
+  static async getActiveReferralCounts(userId: number): Promise<{
+    level1Active: number;
+    level2Active: number;
+    level3Active: number;
+    level4Active: number;
+    level5Active: number;
+  }> {
+    const [level1, level2, level3, level4, level5] = await Promise.all([
+      this.countActiveReferralsWithPremium(userId, 1),
+      this.countActiveReferralsWithPremium(userId, 2),
+      this.countActiveReferralsWithPremium(userId, 3),
+      this.countActiveReferralsWithPremium(userId, 4),
+      this.countActiveReferralsWithPremium(userId, 5),
+    ]);
+
+    return {
+      level1Active: level1,
+      level2Active: level2,
+      level3Active: level3,
+      level4Active: level4,
+      level5Active: level5,
+    };
+  }
 }
