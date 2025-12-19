@@ -3,7 +3,9 @@ ALTER TABLE withdrawals
 ADD COLUMN IF NOT EXISTS wallet_address VARCHAR(42),
 ADD COLUMN IF NOT EXISTS tax_percentage DECIMAL(5,2) DEFAULT 12,
 ADD COLUMN IF NOT EXISTS tax_amount DECIMAL(20,8) DEFAULT 0,
-ADD COLUMN IF NOT EXISTS gross_amount DECIMAL(20,8);
+ADD COLUMN IF NOT EXISTS gross_amount DECIMAL(20,8),
+ADD COLUMN IF NOT EXISTS completed_at TIMESTAMP,
+ADD COLUMN IF NOT EXISTS tx_hash VARCHAR(66);
 
 -- Make withdrawal_type nullable if it exists and is NOT NULL
 ALTER TABLE withdrawals
