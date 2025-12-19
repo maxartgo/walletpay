@@ -15,7 +15,6 @@ export const UserDashboard = () => {
   const [investments, setInvestments] = useState<Investment[]>([]);
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [activeReferralCounts, setActiveReferralCounts] = useState<any>(null);
 
   useEffect(() => {
     if (address && isConnected) {
@@ -46,7 +45,6 @@ export const UserDashboard = () => {
           ...investmentData.stats,
           stakingEligibility: investmentData.stakingEligibility,
         });
-        setActiveReferralCounts(investmentData.activeReferralCounts || null);
       }
 
       // Refresh USDT balance from wallet
@@ -214,76 +212,23 @@ export const UserDashboard = () => {
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 1</p>
               <p className="text-white font-bold">{userWithNumbers.direct_referrals}</p>
-              {activeReferralCounts && (
-                <p className="text-xs mt-1">
-                  <span className="text-green-400">✓ {activeReferralCounts.level1Active}</span>
-                  <span className="text-gray-500 mx-1">/</span>
-                  <span className="text-red-400">✗ {userWithNumbers.direct_referrals - activeReferralCounts.level1Active}</span>
-                </p>
-              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 2</p>
               <p className="text-white font-bold">{userWithNumbers.level2_referrals}</p>
-              {activeReferralCounts && (
-                <p className="text-xs mt-1">
-                  <span className="text-green-400">✓ {activeReferralCounts.level2Active}</span>
-                  <span className="text-gray-500 mx-1">/</span>
-                  <span className="text-red-400">✗ {userWithNumbers.level2_referrals - activeReferralCounts.level2Active}</span>
-                </p>
-              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 3</p>
               <p className="text-white font-bold">{userWithNumbers.level3_referrals}</p>
-              {activeReferralCounts && (
-                <p className="text-xs mt-1">
-                  <span className="text-green-400">✓ {activeReferralCounts.level3Active}</span>
-                  <span className="text-gray-500 mx-1">/</span>
-                  <span className="text-red-400">✗ {userWithNumbers.level3_referrals - activeReferralCounts.level3Active}</span>
-                </p>
-              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 4</p>
               <p className="text-white font-bold">{userWithNumbers.level4_referrals}</p>
-              {activeReferralCounts && (
-                <p className="text-xs mt-1">
-                  <span className="text-green-400">✓ {activeReferralCounts.level4Active}</span>
-                  <span className="text-gray-500 mx-1">/</span>
-                  <span className="text-red-400">✗ {userWithNumbers.level4_referrals - activeReferralCounts.level4Active}</span>
-                </p>
-              )}
             </div>
             <div>
               <p className="text-gray-400 text-xs">{t('dashboard.level')} 5</p>
               <p className="text-white font-bold">{userWithNumbers.level5_referrals}</p>
-              {activeReferralCounts && (
-                <p className="text-xs mt-1">
-                  <span className="text-green-400">✓ {activeReferralCounts.level5Active}</span>
-                  <span className="text-gray-500 mx-1">/</span>
-                  <span className="text-red-400">✗ {userWithNumbers.level5_referrals - activeReferralCounts.level5Active}</span>
-                </p>
-              )}
             </div>
-          </div>
-
-          {/* Referral Requirements Info */}
-          <div className="mt-3 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
-            <h4 className="text-blue-300 font-semibold text-sm mb-2">ℹ️ Requisiti Referral</h4>
-            <ul className="space-y-1 text-xs text-gray-300">
-              <li className="flex items-start gap-2">
-                <span className="text-yellow-400 mt-0.5">🔁</span>
-                <span><strong>Reinvestimento:</strong> Richiede almeno 2 referral L1 con Premium attivo</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-green-400 mt-0.5">💰</span>
-                <span><strong>Prelievo:</strong> Richiede almeno 2 referral L1 e 4 referral L2 con Premium attivo</span>
-              </li>
-            </ul>
-            <p className="text-xs text-gray-400 mt-2">
-              ✓ = Referral con Premium attivo | ✗ = Referral senza Premium attivo
-            </p>
           </div>
         </div>
 
@@ -366,17 +311,7 @@ export const UserDashboard = () => {
       {/* Unlocked Staking */}
       {unlockedInvestments.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">🔓 {t('dashboard.unlockedStakings')}</h2>
-          
-          {/* Reinvest Requirements Notice */}
-          <div className="bg-yellow-900/20 border border-yellow-500/40 rounded-lg p-3 mb-4">
-            <div className="flex items-start gap-2">
-              <span className="text-yellow-400 text-lg">⚠️</span>
-              <div className="text-xs text-yellow-200">
-                <strong>Requisiti per reinvestire:</strong> Almeno 2 referral L1 con Premium attivo
-              </div>
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold text-white mb-4">🔓 {t('dashboard.unlockedStakings')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {unlockedInvestments.map((investment) => (
               <InvestmentCard
