@@ -5,6 +5,10 @@ ADD COLUMN IF NOT EXISTS tax_percentage DECIMAL(5,2) DEFAULT 12,
 ADD COLUMN IF NOT EXISTS tax_amount DECIMAL(20,8) DEFAULT 0,
 ADD COLUMN IF NOT EXISTS gross_amount DECIMAL(20,8);
 
+-- Make withdrawal_type nullable if it exists and is NOT NULL
+ALTER TABLE withdrawals
+ALTER COLUMN withdrawal_type DROP NOT NULL;
+
 -- Update gross_amount for existing records (net_amount / 0.88 to reverse the 12% tax)
 UPDATE withdrawals
 SET gross_amount = ROUND(net_amount / 0.88, 8)
