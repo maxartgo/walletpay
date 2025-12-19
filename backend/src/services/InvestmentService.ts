@@ -16,14 +16,6 @@ export class InvestmentService {
         };
       }
 
-      // Check if already used starter
-      if (user.has_used_starter) {
-        return {
-          success: false,
-          message: 'Starter investment can only be used once',
-        };
-      }
-
       const totalAvailable = user.available_balance + user.referral_balance;
       if (totalAvailable < 50) {
         return {

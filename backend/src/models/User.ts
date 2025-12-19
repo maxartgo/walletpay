@@ -289,16 +289,12 @@ export class UserModel {
   }
 
   /**
-   * Create STARTER investment (50 USDT, one-time)
+   * Create STARTER investment (50 USDT, unlimited)
    */
   static async createStarterInvestment(userId: number): Promise<User> {
     const user = await this.findById(userId);
     if (!user) {
       throw new Error('User not found');
-    }
-
-    if (user.has_used_starter) {
-      throw new Error('Starter investment already used');
     }
 
     const totalAvailable = user.available_balance + user.referral_balance;
@@ -322,8 +318,7 @@ export class UserModel {
     const result = await query(
       `UPDATE users
        SET available_balance = $1,
-           referral_balance = $2,
-           has_used_starter = TRUE
+           referral_balance = $2
        WHERE id = $3
        RETURNING *`,
       [newAvailableBalance, newReferralBalance, userId]

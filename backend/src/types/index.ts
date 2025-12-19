@@ -121,7 +121,7 @@ export const STAKING_TIERS: StakingTier[] = [
     yieldGoal: 50,
     unlockValue: 100,
     estimatedDays: 154,
-    oneTimeOnly: true,
+    oneTimeOnly: false,
   },
   {
     type: 'premium',

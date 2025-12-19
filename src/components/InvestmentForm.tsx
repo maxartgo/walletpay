@@ -19,7 +19,7 @@ export function InvestmentForm({ user, onInvestmentCreated, stakingEligibility }
   const [error, setError] = useState<string | null>(null);
 
   const totalAvailable = user.available_balance + user.referral_balance;
-  const canCreateStarter = !stakingEligibility?.hasUsedStarter && totalAvailable >= 50;
+  const canCreateStarter = totalAvailable >= 50;
   const canCreatePremium = totalAvailable >= 100;
 
   const handleCreateStarter = async () => {
@@ -99,14 +99,10 @@ export function InvestmentForm({ user, onInvestmentCreated, stakingEligibility }
 
       <div className="space-y-4">
         {/* STARTER PACKAGE */}
-        {!stakingEligibility?.hasUsedStarter && (
-          <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-4 border border-green-500/30">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-green-400 font-bold text-lg">🌱 {t('staking.starter.title')}</h4>
-              <span className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">
-                {t('staking.starter.oneTime')}
-              </span>
-            </div>
+        <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-4 border border-green-500/30">
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-green-400 font-bold text-lg">🌱 {t('staking.starter.title')}</h4>
+          </div>
 
             <ul className="space-y-2 text-sm mb-4">
               <li className="flex justify-between">
@@ -145,13 +141,12 @@ export function InvestmentForm({ user, onInvestmentCreated, stakingEligibility }
               )}
             </button>
 
-            {!canCreateStarter && totalAvailable < 50 && (
-              <p className="text-sm text-gray-400 text-center mt-2">
-                {t('staking.missing', { amount: (50 - totalAvailable).toFixed(2) })}
-              </p>
-            )}
-          </div>
-        )}
+          {!canCreateStarter && totalAvailable < 50 && (
+            <p className="text-sm text-gray-400 text-center mt-2">
+              {t('staking.missing', { amount: (50 - totalAvailable).toFixed(2) })}
+            </p>
+          )}
+        </div>
 
         {/* PREMIUM PACKAGE */}
         <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
