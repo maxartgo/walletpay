@@ -37,11 +37,12 @@ export const AdminDashboard = () => {
   };
 
   const handleApprove = async (withdrawalId: number) => {
-    const txHash = prompt(t('admin.enterTxHash'));
-    if (!txHash || !txHash.startsWith('0x')) {
-      alert(t('admin.invalidTxHash'));
+    if (!confirm('⚠️ Conferma approvazione prelievo?\n\nIl prelievo verrà approvato senza TX hash.')) {
       return;
     }
+
+    // Use a placeholder TX hash
+    const txHash = '0x0000000000000000000000000000000000000000000000000000000000000000';
 
     setActionLoading(withdrawalId);
     try {
