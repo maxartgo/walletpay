@@ -178,15 +178,6 @@ export class InvestmentService {
         };
       }
 
-      // Check referral requirements for reinvest
-      const reinvestEligibility = await UserModel.canReinvest(user.id);
-      if (!reinvestEligibility.canReinvest) {
-        return {
-          success: false,
-          message: `To reinvest, you need at least 2 direct referrals (L1) with active Premium staking. You currently have ${reinvestEligibility.level1Count}/2.`,
-        };
-      }
-
       // Calculate locked profits
       const lockedProfit = investment.current_value - 100;
 
