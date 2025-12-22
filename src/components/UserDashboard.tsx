@@ -267,24 +267,6 @@ export const UserDashboard = () => {
               )}
             </div>
           </div>
-
-          {/* Referral Requirements Info */}
-          <div className="mt-3 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
-            <h4 className="text-blue-300 font-semibold text-sm mb-2">ℹ️ Requisiti Referral</h4>
-            <ul className="space-y-1 text-xs text-gray-300">
-              <li className="flex items-start gap-2">
-                <span className="text-yellow-400 mt-0.5">🔁</span>
-                <span><strong>Nuovo Staking:</strong> Richiede almeno 2 referral L1 con Premium attivo</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-green-400 mt-0.5">💰</span>
-                <span><strong>Prelievo:</strong> Richiede almeno 2 referral L1 e 4 referral L2 con Premium attivo</span>
-              </li>
-            </ul>
-            <p className="text-xs text-gray-400 mt-2">
-              ✓ = Referral con Premium attivo | ✗ = Referral senza Premium attivo
-            </p>
-          </div>
         </div>
 
         {/* Referral Link */}
