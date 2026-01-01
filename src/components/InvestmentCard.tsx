@@ -33,7 +33,11 @@ export function InvestmentCard({ investment, onReinvest }: InvestmentCardProps) 
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+    <div className={`bg-gray-800 rounded-lg p-6 ${
+      investment.status === 'active'
+        ? 'border-4 border-yellow-500'
+        : 'border border-gray-700'
+    }`}>
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className="text-lg font-semibold text-white">
