@@ -124,6 +124,16 @@ export const ReferralWithdrawForm = ({ onSuccess }: ReferralWithdrawFormProps) =
 
       <div className="space-y-4">
 
+        {/* Referral Requirements Notice */}
+        <div className="bg-yellow-900/20 border border-yellow-500/40 rounded-lg p-3">
+          <div className="flex items-start gap-2">
+            <span className="text-yellow-400 text-lg">⚠️</span>
+            <div className="text-xs text-yellow-200">
+              <strong>Requisiti per prelevare:</strong> Almeno 2 referral L1 con Premium attivo e 4 referral L2 con Premium attivo
+            </div>
+          </div>
+        </div>
+
         {/* Minimum Withdrawal Notice */}
         <div className="bg-blue-900/30 border border-blue-500/40 rounded-lg p-3">
           <div className="flex items-start gap-2">

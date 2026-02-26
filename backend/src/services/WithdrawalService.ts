@@ -92,6 +92,21 @@ export class WithdrawalService {
         };
       }
 
+      // Check referral requirements for withdrawal (2 L1 + 4 L2 with active Premium)
+      const withdrawalCheck = await UserModel.canWithdraw(user.id);
+      if (!withdrawalCheck.canWithdraw) {
+        return {
+          success: false,
+          message: `Withdrawal requirements not met. You need: 2 Level 1 referrals with active Premium (you have ${withdrawalCheck.level1Count}) and 4 Level 2 referrals with active Premium (you have ${withdrawalCheck.level2Count})`,
+          requirements: {
+            level1Required: 2,
+            level1Current: withdrawalCheck.level1Count,
+            level2Required: 4,
+            level2Current: withdrawalCheck.level2Count,
+          },
+        };
+      }
+
       // Calculate withdrawable amount
       const withdrawableData = await this.getWithdrawableAmount(walletAddress);
       if (!withdrawableData || withdrawableData.grossAmount <= 0) {
@@ -161,6 +176,21 @@ export class WithdrawalService {
         return {
           success: false,
           message: 'User not found',
+        };
+      }
+
+      // Check referral requirements for withdrawal (2 L1 + 4 L2 with active Premium)
+      const withdrawalCheck = await UserModel.canWithdraw(user.id);
+      if (!withdrawalCheck.canWithdraw) {
+        return {
+          success: false,
+          message: `Withdrawal requirements not met. You need: 2 Level 1 referrals with active Premium (you have ${withdrawalCheck.level1Count}) and 4 Level 2 referrals with active Premium (you have ${withdrawalCheck.level2Count})`,
+          requirements: {
+            level1Required: 2,
+            level1Current: withdrawalCheck.level1Count,
+            level2Required: 4,
+            level2Current: withdrawalCheck.level2Count,
+          },
         };
       }
 
