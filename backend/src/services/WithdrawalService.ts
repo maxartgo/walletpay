@@ -92,17 +92,17 @@ export class WithdrawalService {
         };
       }
 
-      // Check referral requirements for withdrawal (2 L1 + 4 L2 with active Premium)
+      // Check global requirements for withdrawal
       const withdrawalCheck = await UserModel.canWithdraw(user.id);
       if (!withdrawalCheck.canWithdraw) {
         return {
           success: false,
-          message: `Withdrawal requirements not met. You need: 2 Level 1 referrals with active Premium (you have ${withdrawalCheck.level1Count}) and 4 Level 2 referrals with active Premium (you have ${withdrawalCheck.level2Count})`,
+          message: `Withdrawal requirements not met. Global targets needed: ${withdrawalCheck.depositsRequired.toLocaleString()} USDT total deposits (current: ${withdrawalCheck.globalDeposits.toLocaleString()} USDT) and ${withdrawalCheck.premiumUsersRequired} active Premium users (current: ${withdrawalCheck.activePremiumUsers})`,
           requirements: {
-            level1Required: 2,
-            level1Current: withdrawalCheck.level1Count,
-            level2Required: 4,
-            level2Current: withdrawalCheck.level2Count,
+            globalDepositsRequired: withdrawalCheck.depositsRequired,
+            globalDepositsCurrent: withdrawalCheck.globalDeposits,
+            premiumUsersRequired: withdrawalCheck.premiumUsersRequired,
+            premiumUsersCurrent: withdrawalCheck.activePremiumUsers,
           },
         };
       }
@@ -179,17 +179,17 @@ export class WithdrawalService {
         };
       }
 
-      // Check referral requirements for withdrawal (2 L1 + 4 L2 with active Premium)
+      // Check global requirements for withdrawal
       const withdrawalCheck = await UserModel.canWithdraw(user.id);
       if (!withdrawalCheck.canWithdraw) {
         return {
           success: false,
-          message: `Withdrawal requirements not met. You need: 2 Level 1 referrals with active Premium (you have ${withdrawalCheck.level1Count}) and 4 Level 2 referrals with active Premium (you have ${withdrawalCheck.level2Count})`,
+          message: `Withdrawal requirements not met. Global targets needed: ${withdrawalCheck.depositsRequired.toLocaleString()} USDT total deposits (current: ${withdrawalCheck.globalDeposits.toLocaleString()} USDT) and ${withdrawalCheck.premiumUsersRequired} active Premium users (current: ${withdrawalCheck.activePremiumUsers})`,
           requirements: {
-            level1Required: 2,
-            level1Current: withdrawalCheck.level1Count,
-            level2Required: 4,
-            level2Current: withdrawalCheck.level2Count,
+            globalDepositsRequired: withdrawalCheck.depositsRequired,
+            globalDepositsCurrent: withdrawalCheck.globalDeposits,
+            premiumUsersRequired: withdrawalCheck.premiumUsersRequired,
+            premiumUsersCurrent: withdrawalCheck.activePremiumUsers,
           },
         };
       }

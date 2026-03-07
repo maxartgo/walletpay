@@ -385,9 +385,9 @@ export const UserDashboard = () => {
           {/* Reinvest Requirements Notice */}
           <div className="bg-yellow-900/20 border border-yellow-500/40 rounded-lg p-3 mb-4">
             <div className="flex items-start gap-2">
-              <span className="text-yellow-400 text-lg">⚠️</span>
+              <span className="text-yellow-400 text-lg">🌍</span>
               <div className="text-xs text-yellow-200">
-                <strong>Requisiti per nuovo staking:</strong> Almeno 2 referral L1 con Premium attivo
+                <strong>Requisiti globali per nuovo staking:</strong> Il sistema deve raggiungere 10.000 USDT di depositi totali e 100 utenti con Premium attivo
               </div>
             </div>
           </div>

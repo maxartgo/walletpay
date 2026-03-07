@@ -409,33 +409,77 @@ export class UserModel {
 
   /**
    * Check if user meets requirements for reinvest
-   * Requires: 2 L1 referrals with active Premium
+   * New system: Same global targets as withdrawal
+   * - 10,000 USDT total global deposits
+   * - 100 active users with Premium staking
    */
-  static async canReinvest(userId: number): Promise<{ canReinvest: boolean; level1Count: number }> {
-    const level1Count = await this.countActiveReferralsWithPremium(userId, 1);
+  static async canReinvest(userId: number): Promise<{
+    canReinvest: boolean;
+    globalDeposits: number;
+    activePremiumUsers: number;
+    depositsRequired: number;
+    premiumUsersRequired: number;
+  }> {
+    // Get global stats
+    const { GlobalStatsModel } = await import('./GlobalStats.js');
+    const globalStats = await GlobalStatsModel.get();
+
+    // Count active users with Premium staking
+    const result = await query(
+      `SELECT COUNT(DISTINCT user_id) as count
+       FROM investments
+       WHERE staking_type = 'premium'
+       AND status = 'active'`
+    );
+    const activePremiumUsers = parseInt(result.rows[0].count);
+
+    const depositsRequired = 10000;
+    const premiumUsersRequired = 100;
 
     return {
-      canReinvest: level1Count >= 2,
-      level1Count,
+      canReinvest: globalStats.total_deposits >= depositsRequired && activePremiumUsers >= premiumUsersRequired,
+      globalDeposits,
+      activePremiumUsers,
+      depositsRequired,
+      premiumUsersRequired,
     };
   }
 
   /**
    * Check if user meets requirements for withdrawal
-   * Requires: 2 L1 + 4 L2 referrals with active Premium
+   * New system: Requires global targets to be reached
+   * - 10,000 USDT total global deposits
+   * - 100 active users with Premium staking
    */
   static async canWithdraw(userId: number): Promise<{
     canWithdraw: boolean;
-    level1Count: number;
-    level2Count: number;
+    globalDeposits: number;
+    activePremiumUsers: number;
+    depositsRequired: number;
+    premiumUsersRequired: number;
   }> {
-    const level1Count = await this.countActiveReferralsWithPremium(userId, 1);
-    const level2Count = await this.countActiveReferralsWithPremium(userId, 2);
+    // Get global stats
+    const { GlobalStatsModel } = await import('./GlobalStats.js');
+    const globalStats = await GlobalStatsModel.get();
+
+    // Count active users with Premium staking
+    const result = await query(
+      `SELECT COUNT(DISTINCT user_id) as count
+       FROM investments
+       WHERE staking_type = 'premium'
+       AND status = 'active'`
+    );
+    const activePremiumUsers = parseInt(result.rows[0].count);
+
+    const depositsRequired = 10000;
+    const premiumUsersRequired = 100;
 
     return {
-      canWithdraw: level1Count >= 2 && level2Count >= 4,
-      level1Count,
-      level2Count,
+      canWithdraw: globalStats.total_deposits >= depositsRequired && activePremiumUsers >= premiumUsersRequired,
+      globalDeposits: globalStats.total_deposits,
+      activePremiumUsers,
+      depositsRequired,
+      premiumUsersRequired,
     };
   }
   /**
