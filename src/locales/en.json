@@ -89,7 +89,9 @@
     "reinvestSuccess": "✅ Reinvestment completed!\n\nLocked profits: {lockedProfit} USDT\nNew staking: 100 USDT created",
     "globalStats": "Global Stats",
     "totalDepositedAllUsers": "Total Deposited by All Users",
-    "totalUsers": "Total Users"
+    "totalUsers": "Total Users",
+    "yourProgress": "Your Personal Progress",
+    "requirementsMet": "Requirements Met! You can withdraw and reinvest"
   },
   "staking": {
     "createNew": "Create New Staking",

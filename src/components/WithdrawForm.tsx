@@ -150,9 +150,9 @@ export const WithdrawForm = ({ onSuccess }: WithdrawFormProps) => {
         {/* Global Requirements Notice */}
         <div className="bg-yellow-900/20 border border-yellow-500/40 rounded-lg p-3">
           <div className="flex items-start gap-2">
-            <span className="text-yellow-400 text-lg">🌍</span>
+            <span className="text-yellow-400 text-lg">🎯</span>
             <div className="text-xs text-yellow-200">
-              <strong>Requisiti globali per prelevare:</strong> Il sistema deve raggiungere 10.000 USDT di depositi totali e 100 utenti con Premium attivo
+              <strong>Requisiti personali per prelevare:</strong> Devi aver attivato il Premium. Dal momento della tua attivazione, devono essere raggiunti 10.000 USDT di depositi globali e 100 utenti Premium attivati dopo di te
             </div>
           </div>
         </div>

@@ -32,6 +32,7 @@ router.get('/investments/:wallet', InvestmentController.getUserInvestments);
 
 // Withdrawal routes
 router.get('/withdrawals/:wallet/amount', WithdrawalController.getWithdrawableAmount);
+router.get('/withdrawals/:wallet/requirements', WithdrawalController.getRequirementsProgress);
 router.post('/withdrawals', WithdrawalController.createWithdrawal);
 router.get('/withdrawals/:wallet', WithdrawalController.getUserWithdrawals);
 

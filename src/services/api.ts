@@ -121,6 +121,11 @@ export const apiService = {
     return response.data;
   },
 
+  async getRequirementsProgress(wallet: string) {
+    const response = await api.get(`/withdrawals/${wallet}/requirements`);
+    return response.data;
+  },
+
   async createReferralWithdrawal(walletAddress: string) {
     const response = await api.post('/withdrawals/referral', { walletAddress });
     return response.data;

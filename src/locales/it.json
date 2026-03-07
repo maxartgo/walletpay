@@ -89,7 +89,9 @@
     "reinvestSuccess": "✅ Reinvestimento completato!\n\nProfitti bloccati: {lockedProfit} USDT\nNuovo staking: 100 USDT creato",
     "globalStats": "Statistiche Globali",
     "totalDepositedAllUsers": "Totale Versato da Tutti gli Utenti",
-    "totalUsers": "Totale Utenti"
+    "totalUsers": "Totale Utenti",
+    "yourProgress": "I Tuoi Progressi Personali",
+    "requirementsMet": "Requisiti Raggiunti! Puoi prelevare e reinvestire"
   },
   "staking": {
     "createNew": "Crea Nuovo Staking",

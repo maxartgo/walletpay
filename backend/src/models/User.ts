@@ -18,6 +18,7 @@ export interface User {
   level5_referrals: number;
   has_used_starter: boolean;
   premium_count: number;
+  premium_activation_date?: Date;
   created_at: Date;
   updated_at: Date;
 }
@@ -330,6 +331,7 @@ export class UserModel {
 
   /**
    * Create PREMIUM investment (100 USDT, tiered)
+   * Sets premium_activation_date on first Premium creation from deposit
    */
   static async createPremiumInvestment(userId: number): Promise<User> {
     const user = await this.findById(userId);
@@ -341,6 +343,9 @@ export class UserModel {
     if (totalAvailable < 100) {
       throw new Error('Insufficient balance for premium investment (minimum 100 USDT)');
     }
+
+    // Check if this is the first Premium (no activation date yet)
+    const isFirstPremium = !user.premium_activation_date;
 
     // Deduct 100 USDT from balances (referral first, then available)
     let remaining = 100;
@@ -355,17 +360,29 @@ export class UserModel {
       newAvailableBalance -= remaining;
     }
 
-    const result = await query(
-      `UPDATE users
-       SET available_balance = $1,
-           referral_balance = $2,
-           premium_count = premium_count + 1
-       WHERE id = $3
-       RETURNING *`,
-      [newAvailableBalance, newReferralBalance, userId]
-    );
+    // Build the query dynamically based on whether it's the first Premium
+    let updateQuery = `
+      UPDATE users
+      SET available_balance = $1,
+          referral_balance = $2,
+          premium_count = premium_count + 1
+    `;
+
+    const queryParams: any[] = [newAvailableBalance, newReferralBalance, userId];
+    let paramIndex = 3;
+
+    if (isFirstPremium) {
+      updateQuery += `, premium_activation_date = NOW()`;
+    }
+
+    updateQuery += ` WHERE id = $${paramIndex + 1} RETURNING *`;
+
+    const result = await query(updateQuery, queryParams);
 
     console.log(`💎 Premium investment created: -100 USDT from balances, premium_count now ${user.premium_count + 1}`);
+    if (isFirstPremium) {
+      console.log(`🎯 Premium activation date set for user ${userId}`);
+    }
     return result.rows[0];
   }
 
@@ -409,9 +426,9 @@ export class UserModel {
 
   /**
    * Check if user meets requirements for reinvest
-   * New system: Same global targets as withdrawal
-   * - 10,000 USDT total global deposits
-   * - 100 active users with Premium staking
+   * New system: Same personal global targets as withdrawal
+   * - 10,000 USDT global deposits AFTER user's Premium activation
+   * - 100 active Premium users activated AFTER user's Premium activation
    */
   static async canReinvest(userId: number): Promise<{
     canReinvest: boolean;
@@ -419,37 +436,21 @@ export class UserModel {
     activePremiumUsers: number;
     depositsRequired: number;
     premiumUsersRequired: number;
+    premiumActivationDate?: Date;
   }> {
-    // Get global stats
-    const { GlobalStatsModel } = await import('./GlobalStats.js');
-    const globalStats = await GlobalStatsModel.get();
-
-    // Count active users with Premium staking
-    const result = await query(
-      `SELECT COUNT(DISTINCT user_id) as count
-       FROM investments
-       WHERE staking_type = 'premium'
-       AND status = 'active'`
-    );
-    const activePremiumUsers = parseInt(result.rows[0].count);
-
-    const depositsRequired = 10000;
-    const premiumUsersRequired = 100;
-
+    // Use the same logic as canWithdraw
+    const result = await this.canWithdraw(userId);
     return {
-      canReinvest: globalStats.total_deposits >= depositsRequired && activePremiumUsers >= premiumUsersRequired,
-      globalDeposits,
-      activePremiumUsers,
-      depositsRequired,
-      premiumUsersRequired,
+      ...result,
+      canReinvest: result.canWithdraw,
     };
   }
 
   /**
    * Check if user meets requirements for withdrawal
-   * New system: Requires global targets to be reached
-   * - 10,000 USDT total global deposits
-   * - 100 active users with Premium staking
+   * New system: Personal global targets from user's Premium activation date
+   * - 10,000 USDT global deposits AFTER user's Premium activation
+   * - 100 active Premium users activated AFTER user's Premium activation
    */
   static async canWithdraw(userId: number): Promise<{
     canWithdraw: boolean;
@@ -457,29 +458,66 @@ export class UserModel {
     activePremiumUsers: number;
     depositsRequired: number;
     premiumUsersRequired: number;
+    premiumActivationDate?: Date;
   }> {
-    // Get global stats
-    const { GlobalStatsModel } = await import('./GlobalStats.js');
-    const globalStats = await GlobalStatsModel.get();
+    const user = await this.findById(userId);
+    if (!user) {
+      return {
+        canWithdraw: false,
+        globalDeposits: 0,
+        activePremiumUsers: 0,
+        depositsRequired: 10000,
+        premiumUsersRequired: 100,
+      };
+    }
 
-    // Count active users with Premium staking
-    const result = await query(
-      `SELECT COUNT(DISTINCT user_id) as count
-       FROM investments
-       WHERE staking_type = 'premium'
-       AND status = 'active'`
+    // User must have activated Premium to withdraw
+    if (!user.premium_activation_date) {
+      return {
+        canWithdraw: false,
+        globalDeposits: 0,
+        activePremiumUsers: 0,
+        depositsRequired: 10000,
+        premiumUsersRequired: 100,
+        premiumActivationDate: undefined,
+      };
+    }
+
+    const activationDate = user.premium_activation_date;
+
+    // Count global deposits made AFTER user's Premium activation
+    const depositsResult = await query(
+      `SELECT COALESCE(SUM(amount), 0) as total_deposits
+       FROM deposits
+       WHERE created_at >= $1`,
+      [activationDate]
     );
-    const activePremiumUsers = parseInt(result.rows[0].count);
+    const globalDeposits = Number(depositsResult.rows[0].total_deposits);
+
+    // Count users who activated Premium AFTER this user's activation
+    // AND currently have an active Premium investment
+    const premiumUsersResult = await query(
+      `SELECT COUNT(DISTINCT u.id) as count
+       FROM users u
+       INNER JOIN investments i ON i.user_id = u.id
+       WHERE u.premium_activation_date >= $1
+       AND u.premium_activation_date IS NOT NULL
+       AND i.staking_type = 'premium'
+       AND i.status = 'active'`,
+      [activationDate]
+    );
+    const activePremiumUsers = parseInt(premiumUsersResult.rows[0].count);
 
     const depositsRequired = 10000;
     const premiumUsersRequired = 100;
 
     return {
-      canWithdraw: globalStats.total_deposits >= depositsRequired && activePremiumUsers >= premiumUsersRequired,
-      globalDeposits: globalStats.total_deposits,
+      canWithdraw: globalDeposits >= depositsRequired && activePremiumUsers >= premiumUsersRequired,
+      globalDeposits,
       activePremiumUsers,
       depositsRequired,
       premiumUsersRequired,
+      premiumActivationDate: activationDate,
     };
   }
   /**

@@ -17,6 +17,7 @@ export const UserDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [activeReferralCounts, setActiveReferralCounts] = useState<any>(null);
   const [globalStats, setGlobalStats] = useState<any>(null);
+  const [requirementsProgress, setRequirementsProgress] = useState<any>(null);
 
   useEffect(() => {
     if (address && isConnected) {
@@ -59,6 +60,14 @@ export const UserDashboard = () => {
         setGlobalStats(globalData);
       } catch (error) {
         console.error('Error loading global stats:', error);
+      }
+
+      // Load personal requirements progress
+      try {
+        const requirementsData = await apiService.getRequirementsProgress(address);
+        setRequirementsProgress(requirementsData.requirements);
+      } catch (error) {
+        console.error('Error loading requirements progress:', error);
       }
     } catch (error) {
       console.error('Error loading user data:', error);
@@ -203,6 +212,59 @@ export const UserDashboard = () => {
               </p>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Personal Requirements Progress */}
+      {requirementsProgress && requirementsProgress.hasActivatedPremium && (
+        <div className="bg-gradient-to-br from-indigo-900/30 to-violet-900/30 rounded-lg p-6 border border-indigo-500/30">
+          <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+            🎯 {t('dashboard.yourProgress')}
+          </h2>
+          <div className="bg-gray-800/50 rounded-lg p-3 mb-4">
+            <p className="text-xs text-indigo-300">
+              Dal tuo attivazione Premium: {requirementsProgress.premiumActivationDate
+                ? new Date(requirementsProgress.premiumActivationDate).toLocaleDateString('it-IT')
+                : 'N/A'}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-gray-800/50 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-1">Deposit Globali dal tuo Premium</p>
+              <p className="text-indigo-400 text-2xl font-bold">
+                {Number(requirementsProgress.globalDeposits || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / {requirementsProgress.depositsRequired.toLocaleString()} USDT
+              </p>
+              <div className="mt-2 bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-500"
+                  style={{ width: `${Math.min((requirementsProgress.globalDeposits / requirementsProgress.depositsRequired) * 100, 100)}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {((requirementsProgress.globalDeposits / requirementsProgress.depositsRequired) * 100).toFixed(1)}% completato
+              </p>
+            </div>
+            <div className="bg-gray-800/50 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-1">Utenti Premium attivi dopo di te</p>
+              <p className="text-violet-400 text-2xl font-bold">
+                {requirementsProgress.activePremiumUsers || 0} / {requirementsProgress.premiumUsersRequired}
+              </p>
+              <div className="mt-2 bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-violet-500 to-purple-500 transition-all duration-500"
+                  style={{ width: `${Math.min((requirementsProgress.activePremiumUsers / requirementsProgress.premiumUsersRequired) * 100, 100)}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {((requirementsProgress.activePremiumUsers / requirementsProgress.premiumUsersRequired) * 100).toFixed(1)}% completato
+              </p>
+            </div>
+          </div>
+          {requirementsProgress.canWithdraw && (
+            <div className="mt-4 bg-green-900/30 border border-green-500/40 rounded-lg p-3 text-center">
+              <p className="text-green-300 text-sm font-semibold">🎉 {t('dashboard.requirementsMet')}</p>
+            </div>
+          )}
         </div>
       )}
 
@@ -385,9 +447,9 @@ export const UserDashboard = () => {
           {/* Reinvest Requirements Notice */}
           <div className="bg-yellow-900/20 border border-yellow-500/40 rounded-lg p-3 mb-4">
             <div className="flex items-start gap-2">
-              <span className="text-yellow-400 text-lg">🌍</span>
+              <span className="text-yellow-400 text-lg">🎯</span>
               <div className="text-xs text-yellow-200">
-                <strong>Requisiti globali per nuovo staking:</strong> Il sistema deve raggiungere 10.000 USDT di depositi totali e 100 utenti con Premium attivo
+                <strong>Requisiti personali per nuovo staking:</strong> Devi aver attivato il Premium. Dal momento della tua attivazione, devono essere raggiunti 10.000 USDT di depositi globali e 100 utenti Premium attivati dopo di te
               </div>
             </div>
           </div>

@@ -92,13 +92,18 @@ export class WithdrawalService {
         };
       }
 
-      // Check global requirements for withdrawal
+      // Check personal global requirements for withdrawal
       const withdrawalCheck = await UserModel.canWithdraw(user.id);
       if (!withdrawalCheck.canWithdraw) {
+        const activationDate = withdrawalCheck.premiumActivationDate
+          ? new Date(withdrawalCheck.premiumActivationDate).toLocaleDateString('it-IT')
+          : 'N/A';
+
         return {
           success: false,
-          message: `Withdrawal requirements not met. Global targets needed: ${withdrawalCheck.depositsRequired.toLocaleString()} USDT total deposits (current: ${withdrawalCheck.globalDeposits.toLocaleString()} USDT) and ${withdrawalCheck.premiumUsersRequired} active Premium users (current: ${withdrawalCheck.activePremiumUsers})`,
+          message: `Withdrawal requirements not met. From your Premium activation (${activationDate}): ${withdrawalCheck.depositsRequired.toLocaleString()} USDT global deposits needed (current: ${withdrawalCheck.globalDeposits.toLocaleString()} USDT) and ${withdrawalCheck.premiumUsersRequired} Premium users activated after you (current: ${withdrawalCheck.activePremiumUsers})`,
           requirements: {
+            premiumActivationDate: withdrawalCheck.premiumActivationDate,
             globalDepositsRequired: withdrawalCheck.depositsRequired,
             globalDepositsCurrent: withdrawalCheck.globalDeposits,
             premiumUsersRequired: withdrawalCheck.premiumUsersRequired,
@@ -179,13 +184,18 @@ export class WithdrawalService {
         };
       }
 
-      // Check global requirements for withdrawal
+      // Check personal global requirements for withdrawal
       const withdrawalCheck = await UserModel.canWithdraw(user.id);
       if (!withdrawalCheck.canWithdraw) {
+        const activationDate = withdrawalCheck.premiumActivationDate
+          ? new Date(withdrawalCheck.premiumActivationDate).toLocaleDateString('it-IT')
+          : 'N/A';
+
         return {
           success: false,
-          message: `Withdrawal requirements not met. Global targets needed: ${withdrawalCheck.depositsRequired.toLocaleString()} USDT total deposits (current: ${withdrawalCheck.globalDeposits.toLocaleString()} USDT) and ${withdrawalCheck.premiumUsersRequired} active Premium users (current: ${withdrawalCheck.activePremiumUsers})`,
+          message: `Withdrawal requirements not met. From your Premium activation (${activationDate}): ${withdrawalCheck.depositsRequired.toLocaleString()} USDT global deposits needed (current: ${withdrawalCheck.globalDeposits.toLocaleString()} USDT) and ${withdrawalCheck.premiumUsersRequired} Premium users activated after you (current: ${withdrawalCheck.activePremiumUsers})`,
           requirements: {
+            premiumActivationDate: withdrawalCheck.premiumActivationDate,
             globalDepositsRequired: withdrawalCheck.depositsRequired,
             globalDepositsCurrent: withdrawalCheck.globalDeposits,
             premiumUsersRequired: withdrawalCheck.premiumUsersRequired,

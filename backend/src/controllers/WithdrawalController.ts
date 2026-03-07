@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { WithdrawalService } from '../services/WithdrawalService.js';
+import { UserModel } from '../models/User.js';
 
 export class WithdrawalController {
   // Get withdrawable amount
@@ -108,6 +109,35 @@ export class WithdrawalController {
       res.json(result);
     } catch (error) {
       console.error('Error creating referral withdrawal:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  // Get user's personal global requirements progress
+  static async getRequirementsProgress(req: Request, res: Response) {
+    try {
+      const { wallet } = req.params;
+
+      if (!wallet || !/^0x[a-fA-F0-9]{40}$/.test(wallet)) {
+        return res.status(400).json({ error: 'Invalid wallet address' });
+      }
+
+      const user = await UserModel.findByWallet(wallet);
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      const requirements = await UserModel.canWithdraw(user.id);
+
+      res.json({
+        success: true,
+        requirements: {
+          ...requirements,
+          hasActivatedPremium: !!user.premium_activation_date,
+        },
+      });
+    } catch (error) {
+      console.error('Error getting requirements progress:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   }
