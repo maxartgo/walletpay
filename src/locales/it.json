@@ -91,7 +91,14 @@
     "totalDepositedAllUsers": "Totale Versato da Tutti gli Utenti",
     "totalUsers": "Totale Utenti",
     "yourProgress": "I Tuoi Progressi Personali",
-    "requirementsMet": "Requisiti Raggiunti! Puoi prelevare e reinvestire"
+    "requirementsMet": "Requisiti Raggiunti! Puoi prelevare e reinvestire",
+    "activatePremium": "Attiva il Tuo Premium",
+    "premiumNotActivated": "Non hai ancora attivato il Premium. Attiva il Premium per vedere i tuoi progressi personali verso gli obiettivi di prelievo.",
+    "howToActivate": "Come Attivare",
+    "step1": "Deposita almeno 100 USDT",
+    "step2": "Crea uno staking Premium dal tuo saldo",
+    "step3": "Inizierai a vedere i tuoi progressi personali!",
+    "premiumBenefits": "Dopo l'attivazione, vedrai i tuoi progressi verso 10.000 USDT di depositi globali e 100 utenti Premium attivati dopo di te."
   },
   "staking": {
     "createNew": "Crea Nuovo Staking",

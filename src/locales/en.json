@@ -91,7 +91,14 @@
     "totalDepositedAllUsers": "Total Deposited by All Users",
     "totalUsers": "Total Users",
     "yourProgress": "Your Personal Progress",
-    "requirementsMet": "Requirements Met! You can withdraw and reinvest"
+    "requirementsMet": "Requirements Met! You can withdraw and reinvest",
+    "activatePremium": "Activate Your Premium",
+    "premiumNotActivated": "You haven't activated Premium yet. Activate Premium to see your personal progress towards withdrawal goals.",
+    "howToActivate": "How to Activate",
+    "step1": "Deposit at least 100 USDT",
+    "step2": "Create a Premium staking from your balance",
+    "step3": "You'll start seeing your personal progress!",
+    "premiumBenefits": "After activation, you'll see your progress towards 10,000 USDT global deposits and 100 Premium users activated after you."
   },
   "staking": {
     "createNew": "Create New Staking",

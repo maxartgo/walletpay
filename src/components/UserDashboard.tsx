@@ -268,6 +268,81 @@ export const UserDashboard = () => {
         </div>
       )}
 
+      {/* Personal Requirements Progress */}
+      {requirementsProgress && requirementsProgress.hasActivatedPremium ? (
+        <div className="bg-gradient-to-br from-indigo-900/30 to-violet-900/30 rounded-lg p-6 border border-indigo-500/30">
+          <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+            🎯 {t('dashboard.yourProgress')}
+          </h2>
+          <div className="bg-gray-800/50 rounded-lg p-3 mb-4">
+            <p className="text-xs text-indigo-300">
+              Dal tuo attivazione Premium: {requirementsProgress.premiumActivationDate
+                ? new Date(requirementsProgress.premiumActivationDate).toLocaleDateString('it-IT')
+                : 'N/A'}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-gray-800/50 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-1">Deposit Globali dal tuo Premium</p>
+              <p className="text-indigo-400 text-2xl font-bold">
+                {Number(requirementsProgress.globalDeposits || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / {requirementsProgress.depositsRequired.toLocaleString()} USDT
+              </p>
+              <div className="mt-2 bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-500"
+                  style={{ width: `${Math.min((requirementsProgress.globalDeposits / requirementsProgress.depositsRequired) * 100, 100)}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {((requirementsProgress.globalDeposits / requirementsProgress.depositsRequired) * 100).toFixed(1)}% completato
+              </p>
+            </div>
+            <div className="bg-gray-800/50 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-1">Utenti Premium attivi dopo di te</p>
+              <p className="text-violet-400 text-2xl font-bold">
+                {requirementsProgress.activePremiumUsers || 0} / {requirementsProgress.premiumUsersRequired}
+              </p>
+              <div className="mt-2 bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-violet-500 to-purple-500 transition-all duration-500"
+                  style={{ width: `${Math.min((requirementsProgress.activePremiumUsers / requirementsProgress.premiumUsersRequired) * 100, 100)}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {((requirementsProgress.activePremiumUsers / requirementsProgress.premiumUsersRequired) * 100).toFixed(1)}% completato
+              </p>
+            </div>
+          </div>
+          {requirementsProgress.canWithdraw && (
+            <div className="mt-4 bg-green-900/30 border border-green-500/40 rounded-lg p-3 text-center">
+              <p className="text-green-300 text-sm font-semibold">🎉 {t('dashboard.requirementsMet')}</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="bg-gradient-to-br from-orange-900/30 to-amber-900/30 rounded-lg p-6 border border-orange-500/30">
+          <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+            💡 {t('dashboard.activatePremium')}
+          </h2>
+          <div className="bg-gray-800/50 rounded-lg p-4 space-y-3">
+            <p className="text-orange-300 text-sm">
+              {t('dashboard.premiumNotActivated')}
+            </p>
+            <div className="bg-orange-900/20 border border-orange-500/40 rounded-lg p-3">
+              <h3 className="text-white font-semibold mb-2 text-sm">🚀 {t('dashboard.howToActivate')}:</h3>
+              <ol className="text-orange-200 text-xs space-y-1 list-decimal list-inside">
+                <li>{t('dashboard.step1')}</li>
+                <li>{t('dashboard.step2')}</li>
+                <li>{t('dashboard.step3')}</li>
+              </ol>
+            </div>
+            <p className="text-xs text-orange-400">
+              ✨ {t('dashboard.premiumBenefits')}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* User Overview */}
       <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-lg p-6 border border-blue-500/30">
         <h2 className="text-2xl font-bold text-white mb-4">👤 {t('dashboard.myAccount')}</h2>
