@@ -86,7 +86,10 @@
       "step5": "5. Sblocco a 200 USDT (100% ROI lordo)"
     },
     "afterFirstDeposit": "Dopo il primo deposito, questa dashboard mostrerà tutti i tuoi dati",
-    "reinvestSuccess": "✅ Reinvestimento completato!\n\nProfitti bloccati: {lockedProfit} USDT\nNuovo staking: 100 USDT creato"
+    "reinvestSuccess": "✅ Reinvestimento completato!\n\nProfitti bloccati: {lockedProfit} USDT\nNuovo staking: 100 USDT creato",
+    "globalStats": "Statistiche Globali",
+    "totalDepositedAllUsers": "Totale Versato da Tutti gli Utenti",
+    "totalUsers": "Totale Utenti"
   },
   "staking": {
     "createNew": "Crea Nuovo Staking",

@@ -16,6 +16,7 @@ export const UserDashboard = () => {
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [activeReferralCounts, setActiveReferralCounts] = useState<any>(null);
+  const [globalStats, setGlobalStats] = useState<any>(null);
 
   useEffect(() => {
     if (address && isConnected) {
@@ -51,6 +52,14 @@ export const UserDashboard = () => {
 
       // Refresh USDT balance from wallet
       await refreshBalance();
+
+      // Load global stats
+      try {
+        const globalData = await apiService.getGlobalStats();
+        setGlobalStats(globalData);
+      } catch (error) {
+        console.error('Error loading global stats:', error);
+      }
     } catch (error) {
       console.error('Error loading user data:', error);
     } finally {
@@ -173,6 +182,29 @@ export const UserDashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Global Stats - Total Deposited */}
+      {globalStats && (
+        <div className="bg-gradient-to-br from-amber-900/30 to-orange-900/30 rounded-lg p-6 border border-amber-500/30">
+          <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+            🌍 {t('dashboard.globalStats')}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-gray-800/50 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-1">{t('dashboard.totalDepositedAllUsers')}</p>
+              <p className="text-amber-400 text-3xl font-bold">
+                {Number(globalStats.total_deposits || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT
+              </p>
+            </div>
+            <div className="bg-gray-800/50 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-1">{t('dashboard.totalUsers')}</p>
+              <p className="text-orange-400 text-3xl font-bold">
+                {globalStats.total_users || 0}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* User Overview */}
       <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-lg p-6 border border-blue-500/30">

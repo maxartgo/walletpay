@@ -86,7 +86,10 @@
       "step5": "5. Unlock at 200 USDT (100% gross ROI)"
     },
     "afterFirstDeposit": "After the first deposit, this dashboard will show all your data",
-    "reinvestSuccess": "✅ Reinvestment completed!\n\nLocked profits: {lockedProfit} USDT\nNew staking: 100 USDT created"
+    "reinvestSuccess": "✅ Reinvestment completed!\n\nLocked profits: {lockedProfit} USDT\nNew staking: 100 USDT created",
+    "globalStats": "Global Stats",
+    "totalDepositedAllUsers": "Total Deposited by All Users",
+    "totalUsers": "Total Users"
   },
   "staking": {
     "createNew": "Create New Staking",
