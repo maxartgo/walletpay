@@ -216,18 +216,18 @@ export const UserDashboard = () => {
       )}
 
       {/* Personal Requirements Progress */}
-      {requirementsProgress && requirementsProgress.hasActivatedPremium && (
+      {requirementsProgress && requirementsProgress.hasActivatedPremium ? (
         <div className="bg-gradient-to-br from-indigo-900/30 to-violet-900/30 rounded-lg p-6 border border-indigo-500/30">
           <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
             🎯 {t('dashboard.yourProgress')}
           </h2>
-          <div className="bg-gray-800/50 rounded-lg p-3 mb-4">
-            <p className="text-xs text-indigo-300">
-              Dal tuo attivazione Premium: {requirementsProgress.premiumActivationDate
-                ? new Date(requirementsProgress.premiumActivationDate).toLocaleDateString('it-IT')
-                : 'N/A'}
-            </p>
-          </div>
+          {requirementsProgress.premiumActivationDate && (
+            <div className="bg-gray-800/50 rounded-lg p-3 mb-4">
+              <p className="text-xs text-indigo-300">
+                Dal tuo attivazione Premium: {new Date(requirementsProgress.premiumActivationDate).toLocaleDateString('it-IT')}
+              </p>
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-gray-800/50 rounded-lg p-4">
               <p className="text-gray-400 text-sm mb-1">Deposit Globali dal tuo Premium</p>
@@ -266,58 +266,24 @@ export const UserDashboard = () => {
             </div>
           )}
         </div>
-      )}
-
-      {/* Personal Requirements Progress */}
-      {requirementsProgress && requirementsProgress.hasActivatedPremium ? (
-        <div className="bg-gradient-to-br from-indigo-900/30 to-violet-900/30 rounded-lg p-6 border border-indigo-500/30">
+      ) : requirementsProgress && user && user.premium_count > 0 ? (
+        <div className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 rounded-lg p-6 border border-yellow-500/30">
           <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-            🎯 {t('dashboard.yourProgress')}
+            ⚠️ Premium Activation Date Missing
           </h2>
-          <div className="bg-gray-800/50 rounded-lg p-3 mb-4">
-            <p className="text-xs text-indigo-300">
-              Dal tuo attivazione Premium: {requirementsProgress.premiumActivationDate
-                ? new Date(requirementsProgress.premiumActivationDate).toLocaleDateString('it-IT')
-                : 'N/A'}
+          <div className="bg-gray-800/50 rounded-lg p-4 space-y-3">
+            <p className="text-yellow-300 text-sm">
+              Hai {user.premium_count} investimento/i Premium attivo/i, ma la data di attivazione non è registrata nel sistema.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-800/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm mb-1">Deposit Globali dal tuo Premium</p>
-              <p className="text-indigo-400 text-2xl font-bold">
-                {Number(requirementsProgress.globalDeposits || 0).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / {requirementsProgress.depositsRequired.toLocaleString()} USDT
-              </p>
-              <div className="mt-2 bg-gray-700 rounded-full h-3 overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-500"
-                  style={{ width: `${Math.min((requirementsProgress.globalDeposits / requirementsProgress.depositsRequired) * 100, 100)}%` }}
-                />
-              </div>
-              <p className="text-xs text-gray-500 mt-1">
-                {((requirementsProgress.globalDeposits / requirementsProgress.depositsRequired) * 100).toFixed(1)}% completato
-              </p>
-            </div>
-            <div className="bg-gray-800/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm mb-1">Utenti Premium attivi dopo di te</p>
-              <p className="text-violet-400 text-2xl font-bold">
-                {requirementsProgress.activePremiumUsers || 0} / {requirementsProgress.premiumUsersRequired}
-              </p>
-              <div className="mt-2 bg-gray-700 rounded-full h-3 overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-violet-500 to-purple-500 transition-all duration-500"
-                  style={{ width: `${Math.min((requirementsProgress.activePremiumUsers / requirementsProgress.premiumUsersRequired) * 100, 100)}%` }}
-                />
-              </div>
-              <p className="text-xs text-gray-500 mt-1">
-                {((requirementsProgress.activePremiumUsers / requirementsProgress.premiumUsersRequired) * 100).toFixed(1)}% completato
+            <p className="text-yellow-200 text-sm">
+              Contatta l'amministratore per impostare correttamente la tua data di attivazione Premium e vedere il tuo progresso verso i requisiti di prelievo.
+            </p>
+            <div className="bg-yellow-900/20 border border-yellow-500/40 rounded-lg p-3">
+              <p className="text-yellow-400 text-xs">
+                💡 Il sistema richiede una data di attivazione Premium per calcolare i tuoi obiettivi personali (depositi globali e utenti Premium attivati dopo di te).
               </p>
             </div>
           </div>
-          {requirementsProgress.canWithdraw && (
-            <div className="mt-4 bg-green-900/30 border border-green-500/40 rounded-lg p-3 text-center">
-              <p className="text-green-300 text-sm font-semibold">🎉 {t('dashboard.requirementsMet')}</p>
-            </div>
-          )}
         </div>
       ) : (
         <div className="bg-gradient-to-br from-orange-900/30 to-amber-900/30 rounded-lg p-6 border border-orange-500/30">

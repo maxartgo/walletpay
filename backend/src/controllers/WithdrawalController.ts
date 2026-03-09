@@ -129,11 +129,23 @@ export class WithdrawalController {
 
       const requirements = await UserModel.canWithdraw(user.id);
 
+      // Check if user has activated Premium (has premium_activation_date OR has active Premium investments)
+      const hasActivatedPremium = !!(user.premium_activation_date || user.premium_count > 0);
+
+      console.log(`📊 Requirements progress for ${wallet}:`, {
+        hasActivatedPremium,
+        premium_activation_date: user.premium_activation_date,
+        premium_count: user.premium_count,
+        canWithdraw: requirements.canWithdraw,
+        globalDeposits: requirements.globalDeposits,
+        activePremiumUsers: requirements.activePremiumUsers,
+      });
+
       res.json({
         success: true,
         requirements: {
           ...requirements,
-          hasActivatedPremium: !!user.premium_activation_date,
+          hasActivatedPremium,
         },
       });
     } catch (error) {
