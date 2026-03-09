@@ -13,6 +13,9 @@ export interface User {
   level3_referrals: number;
   level4_referrals: number;
   level5_referrals: number;
+  has_used_starter: boolean;
+  premium_count: number;
+  premium_activation_date?: string;
   created_at: string;
   updated_at: string;
 }
