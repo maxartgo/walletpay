@@ -65,6 +65,9 @@ export const UserDashboard = () => {
       // Load personal requirements progress
       try {
         const requirementsData = await apiService.getRequirementsProgress(address);
+        console.log('📊 Requirements data loaded:', requirementsData);
+        console.log('📊 Requirements:', requirementsData.requirements);
+        console.log('📊 hasActivatedPremium:', requirementsData.requirements?.hasActivatedPremium);
         setRequirementsProgress(requirementsData.requirements);
       } catch (error) {
         console.error('Error loading requirements progress:', error);
