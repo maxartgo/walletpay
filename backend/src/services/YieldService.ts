@@ -31,12 +31,17 @@ export class YieldService {
         try {
           const updatedInvestment = await InvestmentModel.applyDailyYield(investment.id);
 
-          const yieldAdded = updatedInvestment.current_value - investment.current_value;
-          const progress = (updatedInvestment.yield_earned / updatedInvestment.yield_goal) * 100;
+          const currentValue = Number(investment.current_value);
+          const updatedValue = Number(updatedInvestment.current_value);
+          const yieldEarned = Number(updatedInvestment.yield_earned);
+          const yieldGoal = Number(updatedInvestment.yield_goal);
+
+          const yieldAdded = updatedValue - currentValue;
+          const progress = (yieldEarned / yieldGoal) * 100;
 
           console.log(`📈 Investment #${investment.id}:`);
-          console.log(`   Value: ${investment.current_value.toFixed(2)} → ${updatedInvestment.current_value.toFixed(2)} USDT`);
-          console.log(`   Yield: +${yieldAdded.toFixed(2)} USDT (total: ${updatedInvestment.yield_earned.toFixed(2)}/${updatedInvestment.yield_goal.toFixed(2)})`);
+          console.log(`   Value: ${currentValue.toFixed(2)} → ${updatedValue.toFixed(2)} USDT`);
+          console.log(`   Yield: +${yieldAdded.toFixed(2)} USDT (total: ${yieldEarned.toFixed(2)}/${yieldGoal.toFixed(2)})`);
           console.log(`   Progress: ${progress.toFixed(1)}%`);
 
           if (updatedInvestment.status === 'unlocked') {
@@ -73,9 +78,9 @@ export class YieldService {
   static calculateDaysRemaining(investment: any): number {
     if (investment.status !== 'active') return 0;
 
-    const dailyPercentage = investment.daily_percentage / 100;
-    const currentValue = investment.current_value;
-    const targetValue = investment.amount + investment.yield_goal;
+    const dailyPercentage = Number(investment.daily_percentage) / 100;
+    const currentValue = Number(investment.current_value);
+    const targetValue = Number(investment.amount) + Number(investment.yield_goal);
 
     const ratio = targetValue / currentValue;
     const days = Math.log(ratio) / Math.log(1 + dailyPercentage);
