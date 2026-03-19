@@ -16,7 +16,7 @@ export class InvestmentService {
         };
       }
 
-      const totalAvailable = user.available_balance + user.referral_balance;
+      const totalAvailable = Number(user.available_balance) + Number(user.referral_balance);
       if (totalAvailable < 50) {
         return {
           success: false,
@@ -57,7 +57,7 @@ export class InvestmentService {
         };
       }
 
-      const totalAvailable = user.available_balance + user.referral_balance;
+      const totalAvailable = Number(user.available_balance) + Number(user.referral_balance);
       if (totalAvailable < 100) {
         return {
           success: false,
@@ -105,7 +105,7 @@ export class InvestmentService {
       }
 
       // Check if user has enough balance
-      const totalAvailable = user.available_balance + user.referral_balance;
+      const totalAvailable = Number(user.available_balance) + Number(user.referral_balance);
       if (totalAvailable < 100) {
         return {
           success: false,
@@ -171,7 +171,8 @@ export class InvestmentService {
       }
 
       // Check if value is at least 100
-      if (investment.current_value < 100) {
+      const currentValue = Number(investment.current_value);
+      if (currentValue < 100) {
         return {
           success: false,
           message: 'Investment value is less than 100 USDT',
@@ -179,7 +180,7 @@ export class InvestmentService {
       }
 
       // Calculate locked profits
-      const lockedProfit = investment.current_value - 100;
+      const lockedProfit = currentValue - 100;
 
       // Mark old investment as withdrawn
       await InvestmentModel.markAsWithdrawn(investmentId);
@@ -258,15 +259,9 @@ export class InvestmentService {
   static calculateDaysRemaining(investment: any): number {
     if (investment.status !== 'active') return 0;
 
-    const currentYield = investment.yield_earned;
-    const goalYield = investment.yield_goal;
-    const dailyPercentage = investment.daily_percentage / 100;
-
-    // Using compound interest formula
-    // goal = current_value * (1 + rate)^days
-    // Solve for days
-    const currentValue = investment.current_value;
-    const targetValue = investment.amount + goalYield;
+    const dailyPercentage = Number(investment.daily_percentage) / 100;
+    const currentValue = Number(investment.current_value);
+    const targetValue = Number(investment.amount) + Number(investment.yield_goal);
 
     const ratio = targetValue / currentValue;
     const days = Math.log(ratio) / Math.log(1 + dailyPercentage);
